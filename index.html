@@ -1012,7 +1012,7 @@
 
   /* ===== AUTH PAGE ===== */
   #auth-page {
-    display: none;
+    display: flex;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
@@ -1246,7 +1246,7 @@
 <body>
 
 <!-- ========== AUTH PAGE ========== -->
-<div id="auth-page" style="display:none;">
+<div id="auth-page" style="display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px;">
   <div class="auth-box">
     <div class="auth-logo">AWO</div>
     <div class="auth-brand">All Work <span>Online</span></div>
@@ -1680,10 +1680,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <!-- Firebase Compat (no ES module — works everywhere) -->
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js" defer></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js" defer></script>
 <script>
-  // ====== ERROR DISPLAY (screen pe dikhega) ======
+  // ====== ERROR DISPLAY ======
   window.onerror = function(msg, src, line) {
     var d = document.getElementById('_err_overlay');
     if (!d) {
@@ -1695,9 +1695,10 @@
     d.innerHTML += '<b>ERROR:</b> ' + msg + '<br><small>' + src + ':' + line + '</small><br>';
   };
 
-  // ====== FIREBASE INIT ======
-  try {
-    var _firebaseConfig = {
+  // ====== FIREBASE INIT — runs after all scripts loaded ======
+  function initFirebase() {
+    try {
+      var _firebaseConfig = {
       apiKey: "AIzaSyBexpZGTfu4tNg72CG__EWyRbyoOa-UmGU",
       authDomain: "card-pvc-print.firebaseapp.com",
       projectId: "card-pvc-print",
@@ -1785,45 +1786,42 @@
 
   } catch(e) {
     console.error('Firebase init failed:', e);
-    document.addEventListener('DOMContentLoaded', function() {
-      document.getElementById('auth-page').style.display = 'flex';
-    });
   }
+  } // end initFirebase
 
   // ====== AUTO LOGIN CHECK ======
-  document.addEventListener('DOMContentLoaded', function() {
-    // Safety fallback — agar 3 sec mein kuch na dikhe toh auth page show karo
-    var shown = false;
-    var fallback = setTimeout(function() {
-      if (!shown) {
-        console.warn('Fallback: showing auth page');
-        document.getElementById('auth-page').style.display = 'flex';
-      }
-    }, 3000);
+  // auth-page pehle se visible hai HTML mein
+  // Firebase load hone ke baad auto-login check karo
+  window.addEventListener('load', function() {
+    // Firebase init call karo
+    if (typeof firebase !== 'undefined') {
+      initFirebase();
+    } else {
+      // Firebase CDN load nahi hua — retry
+      setTimeout(function() {
+        if (typeof firebase !== 'undefined') initFirebase();
+      }, 1000);
+    }
 
     var current = localStorage.getItem('awo_current') || null;
-    if (current) {
+    if (!current) return;
+
+    function tryAutoLogin() {
+      if (!window._fbGetUserData) { setTimeout(tryAutoLogin, 300); return; }
       window._fbGetUserData(current).then(function(userData) {
-        shown = true;
-        clearTimeout(fallback);
         if (userData) {
           window._currentUserData = userData;
+          document.getElementById('auth-page').style.display = 'none';
           showDashboard();
         } else {
           localStorage.removeItem('awo_current');
-          document.getElementById('auth-page').style.display = 'flex';
         }
       }).catch(function(e) {
-        shown = true;
-        clearTimeout(fallback);
         console.error(e);
-        document.getElementById('auth-page').style.display = 'flex';
+        localStorage.removeItem('awo_current');
       });
-    } else {
-      shown = true;
-      clearTimeout(fallback);
-      document.getElementById('auth-page').style.display = 'flex';
     }
+    setTimeout(tryAutoLogin, 500);
   });
 </script>
 
@@ -2041,6 +2039,7 @@ function doLogout() {
   document.getElementById('auth-page').style.display='flex';
   document.getElementById('login-pass').value='';
   document.getElementById('login-msg').className='auth-msg';
+  document.getElementById('login-msg').textContent='';
 }
 
 // ====== SHOW DASHBOARD ======
