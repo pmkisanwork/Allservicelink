@@ -1,761 +1,3014 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>All Work Online – Services</title>
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;800&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet"/>
-  <style>
-    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
-    :root {
-      --saffron:#FF6B00; --saffron-light:#FF9240;
-      --green:#00873E;   --green-light:#00B352;
-      --navy:#0A1628;    --navy-mid:#122040; --navy-soft:#1A2E55;
-      --gold:#F5C518;    --white:#FFFFFF;    --text-light:#94A3B8;
-    }
-    html { scroll-behavior:smooth; }
-    body { font-family:'Poppins',sans-serif; background:var(--navy); color:var(--white); min-height:100vh; overflow-x:hidden; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>All Work Online - Farmer ID Card Generator</title>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&family=Oswald:wght@400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
 
-    /* BG */
-    body::before {
-      content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
-      background:
-        radial-gradient(ellipse 80% 50% at 20% -10%, rgba(255,107,0,0.18) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 40% at 80% 110%, rgba(0,135,62,0.15) 0%, transparent 60%),
-        repeating-linear-gradient(45deg,transparent,transparent 40px,rgba(255,255,255,0.015) 40px,rgba(255,255,255,0.015) 41px);
-    }
 
-    /* ── TICKER ── */
-    .ticker-bar {
-      background:linear-gradient(90deg,#b71c1c,#e65100,#b71c1c);
-      background-size:200% auto; animation:tickerBg 3s linear infinite;
-      padding:8px 0; overflow:hidden; position:relative; z-index:101;
-    }
-    @keyframes tickerBg{0%{background-position:0%}100%{background-position:200%}}
-    .ticker-inner { display:flex; align-items:center; }
-    .ticker-label {
-      background:white; color:#b71c1c; font-size:11px; font-weight:800;
-      padding:3px 14px; white-space:nowrap; letter-spacing:1px;
-      flex-shrink:0; margin-right:16px;
-    }
-    .ticker-scroll { overflow:hidden; flex:1; }
-    .ticker-text {
-      display:inline-block; white-space:nowrap;
-      color:white; font-size:12px; font-weight:600;
-      animation:tickerMove 25s linear infinite;
-    }
-    @keyframes tickerMove{0%{transform:translateX(100vw)}100%{transform:translateX(-100%)}}
+  :root {
+    --green-dark: #0d4f1c;
+    --green-mid: #1a7a30;
+    --green-light: #28a745;
+    --green-pale: #eaf5ea;
+    --gold: #f0b429;
+    --gold-dark: #c8840b;
+    --white: #ffffff;
+    --text-dark: #0d1f0d;
+  }
 
-    /* ── HEADER ── */
-    header {
-      position:sticky; top:0; z-index:100;
-      background:rgba(10,22,40,0.95); backdrop-filter:blur(16px);
-      border-bottom:1px solid rgba(255,107,0,0.2); padding:0 24px;
-    }
-    .header-inner {
-      max-width:1200px; margin:0 auto;
-      display:flex; align-items:center; justify-content:space-between; height:66px;
-    }
-    .logo { display:flex; align-items:center; gap:12px; text-decoration:none; }
-    .logo-icon {
-      width:42px; height:42px; background:linear-gradient(135deg,var(--saffron),var(--gold));
-      border-radius:10px; display:flex; align-items:center; justify-content:center;
-      font-size:20px; box-shadow:0 4px 16px rgba(255,107,0,0.4);
-    }
-    .logo-text {
-      font-family:'Baloo 2',cursive; font-weight:800; font-size:1.25rem;
-      background:linear-gradient(90deg,var(--saffron-light),var(--gold));
-      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
-    }
-    .logo-sub { display:block; font-size:10px; color:var(--text-light); font-weight:400; -webkit-text-fill-color:var(--text-light); }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
-    nav { display:flex; align-items:center; gap:4px; flex-wrap:wrap; }
-    nav a {
-      color:var(--text-light); text-decoration:none; font-size:0.78rem; font-weight:500;
-      padding:6px 12px; border-radius:20px; transition:all 0.2s; letter-spacing:0.03em;
-    }
-    nav a:hover { color:var(--white); background:rgba(255,107,0,0.15); }
-    nav a.active { color:var(--saffron); background:rgba(255,107,0,0.12); }
-    .btn-login {
-      background:linear-gradient(135deg,var(--saffron),var(--saffron-light)) !important;
-      color:white !important; padding:8px 18px !important; border-radius:22px !important;
-      font-weight:600 !important; box-shadow:0 4px 12px rgba(255,107,0,0.35);
-    }
-    .btn-login:hover { transform:translateY(-1px); }
+  body {
+    font-family: 'Barlow Condensed', 'Noto Sans Devanagari', sans-serif;
+    background: linear-gradient(145deg, #071a09 0%, #0d4f1c 45%, #071a09 100%);
+    min-height: 100vh;
+    padding: 20px;
+    color: var(--text-dark);
+  }
 
-    /* ── HERO ── */
-    .hero {
-      position:relative; z-index:1; text-align:center;
-      padding:64px 24px 40px;
-    }
-    .hero-badge {
-      display:inline-flex; align-items:center; gap:8px;
-      background:rgba(255,107,0,0.12); border:1px solid rgba(255,107,0,0.3);
-      color:var(--saffron-light); font-size:0.75rem; font-weight:600;
-      padding:6px 18px; border-radius:30px; letter-spacing:0.08em;
-      text-transform:uppercase; margin-bottom:20px;
-      animation:fadeDown 0.6s ease both;
-    }
-    .hero h1 {
-      font-family:'Baloo 2',cursive; font-weight:800;
-      font-size:clamp(2rem,5vw,3.2rem); line-height:1.15; margin-bottom:14px;
-      animation:fadeDown 0.7s 0.1s ease both;
-    }
-    .hero h1 span {
-      background:linear-gradient(90deg,var(--saffron),var(--gold),var(--green-light));
-      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
-    }
-    .hero p {
-      color:var(--text-light); font-size:1rem; max-width:500px;
-      margin:0 auto 28px; line-height:1.7; animation:fadeDown 0.7s 0.2s ease both;
-    }
-    .tricolor-bar {
-      display:flex; justify-content:center; width:120px; height:4px;
-      border-radius:4px; overflow:hidden; margin:0 auto 36px;
-      animation:fadeDown 0.7s 0.3s ease both;
-    }
-    .tricolor-bar div{flex:1}
-    .tricolor-bar div:nth-child(1){background:var(--saffron)}
-    .tricolor-bar div:nth-child(2){background:var(--white)}
-    .tricolor-bar div:nth-child(3){background:var(--green)}
+  .company-header {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  .company-name {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.1);
+    border: 1.5px solid rgba(240,180,41,0.5);
+    border-radius: 50px;
+    padding: 6px 20px;
+    margin-bottom: 6px;
+  }
+  .alw-logo-header {
+    width: 32px; height: 32px;
+    background: linear-gradient(135deg, #f0b429, #c8840b);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(240,180,41,0.4);
+  }
+  .company-name-text {
+    color: #fff;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+  }
+  .company-name-text span { color: var(--gold); }
 
-    /* ── SEARCH BOX ── */
-    .search-wrap {
-      max-width:520px; margin:0 auto 8px;
-      animation:fadeDown 0.7s 0.35s ease both;
-      position:relative; z-index:2;
-    }
-    .search-box {
-      width:100%; padding:14px 50px 14px 20px;
-      background:rgba(255,255,255,0.07);
-      border:1.5px solid rgba(255,255,255,0.15);
-      border-radius:50px; color:white; font-size:14px;
-      font-family:'Poppins',sans-serif; outline:none;
-      transition:all 0.25s;
-    }
-    .search-box::placeholder { color:rgba(255,255,255,0.4); }
-    .search-box:focus {
-      background:rgba(255,255,255,0.1);
-      border-color:rgba(255,107,0,0.5);
-      box-shadow:0 0 0 4px rgba(255,107,0,0.1);
-    }
-    .search-icon {
-      position:absolute; right:18px; top:50%; transform:translateY(-50%);
-      font-size:18px; pointer-events:none;
-    }
-    .search-hint { text-align:center; font-size:12px; color:var(--text-light); margin-bottom:32px; }
+  h1.page-title {
+    text-align: center;
+    color: #fff;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    margin-bottom: 4px;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+    text-transform: uppercase;
+  }
+  .page-subtitle {
+    text-align: center;
+    color: #81c784;
+    font-size: 0.9rem;
+    margin-bottom: 24px;
+    letter-spacing: 1.5px;
+  }
 
-    /* ── STATS ── */
-    .stats-bar {
-      position:relative; z-index:1;
-      background:rgba(255,255,255,0.04);
-      border-top:1px solid rgba(255,255,255,0.07);
-      border-bottom:1px solid rgba(255,255,255,0.07);
-      padding:22px 24px; margin-bottom:8px;
-    }
-    .stats-inner {
-      max-width:1200px; margin:0 auto;
-      display:flex; justify-content:space-around; flex-wrap:wrap; gap:16px; text-align:center;
-    }
-    .stat-item h3 {
-      font-family:'Baloo 2',cursive; font-size:1.7rem; font-weight:800;
-      background:linear-gradient(90deg,var(--saffron),var(--gold));
-      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
-    }
-    .stat-item p { color:var(--text-light); font-size:0.78rem; margin-top:2px; }
+  .container { max-width: 900px; margin: 0 auto; }
 
-    /* ── FILTERS ── */
-    .filters {
-      position:relative; z-index:1;
-      display:flex; justify-content:center; flex-wrap:wrap;
-      gap:8px; padding:20px 24px 32px;
-      animation:fadeUp 0.7s 0.3s ease both;
-    }
-    .filter-btn {
-      display:flex; align-items:center; gap:6px;
-      background:rgba(255,255,255,0.05);
-      border:1px solid rgba(255,255,255,0.1);
-      color:var(--text-light); font-family:'Poppins',sans-serif;
-      font-size:0.8rem; font-weight:500; padding:8px 18px;
-      border-radius:30px; cursor:pointer; transition:all 0.2s;
-    }
-    .filter-btn:hover, .filter-btn.active {
-      background:rgba(255,107,0,0.18);
-      border-color:rgba(255,107,0,0.45);
-      color:var(--white); transform:translateY(-1px);
-    }
+  .form-section {
+    background: rgba(255,255,255,0.96);
+    border-radius: 14px;
+    padding: 22px 26px;
+    margin-bottom: 22px;
+    box-shadow: 0 6px 28px rgba(0,0,0,0.3);
+    border: 1.5px solid rgba(40,167,69,0.3);
+  }
+  .form-section h2 {
+    color: var(--green-dark);
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-left: 4px solid var(--gold);
+    padding-left: 10px;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
 
-    /* ── SERVICES GRID ── */
-    .services-section {
-      position:relative; z-index:1;
-      max-width:1200px; margin:0 auto; padding:0 24px 80px;
-    }
-    .category-title {
-      display:flex; align-items:center; gap:12px;
-      font-family:'Baloo 2',cursive; font-size:1.2rem; font-weight:700;
-      margin:40px 0 18px; color:var(--white);
-    }
-    .category-title .dot { width:10px; height:10px; border-radius:50%; }
-    .category-title .line { flex:1; height:1px; background:rgba(255,255,255,0.07); }
-    .category-count {
-      font-size:11px; font-weight:600; padding:2px 10px; border-radius:20px;
-      background:rgba(255,255,255,0.08); color:var(--text-light);
-    }
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+  }
+  .form-group { display: flex; flex-direction: column; gap: 4px; }
+  .form-group.full-width { grid-column: 1 / -1; }
 
-    .grid {
-      display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:14px;
-    }
-    .card {
-      background:rgba(255,255,255,0.04);
-      border:1px solid rgba(255,255,255,0.08);
-      border-radius:18px; padding:22px 20px;
-      display:flex; flex-direction:column; gap:12px;
-      transition:transform 0.22s, box-shadow 0.22s, border-color 0.22s, background 0.22s;
-      position:relative; overflow:hidden; cursor:pointer;
-    }
-    .card::before {
-      content:''; position:absolute; top:0; left:0; right:0; height:3px;
-      opacity:0; transition:opacity 0.2s;
-    }
-    .card:hover {
-      transform:translateY(-6px);
-      box-shadow:0 16px 48px rgba(0,0,0,0.35);
-      border-color:rgba(255,255,255,0.2);
-      background:rgba(255,255,255,0.07);
-    }
-    .card:hover::before { opacity:1; }
-    .card-top { display:flex; align-items:center; justify-content:space-between; }
-    .card-icon {
-      width:48px; height:48px; border-radius:13px;
-      display:flex; align-items:center; justify-content:center;
-      font-size:24px; flex-shrink:0; transition:transform 0.2s;
-    }
-    .card:hover .card-icon { transform:scale(1.1) rotate(-3deg); }
-    .badge-free {
-      background:rgba(0,179,82,0.15); color:var(--green-light);
-      font-size:0.68rem; font-weight:700; padding:3px 10px;
-      border-radius:20px; border:1px solid rgba(0,179,82,0.3); letter-spacing:0.05em;
-    }
-    .badge-popular {
-      background:rgba(255,107,0,0.15); color:var(--saffron-light);
-      font-size:0.68rem; font-weight:700; padding:3px 10px;
-      border-radius:20px; border:1px solid rgba(255,107,0,0.3); letter-spacing:0.05em;
-    }
-    .card-name { font-weight:600; font-size:0.9rem; line-height:1.4; color:var(--white); }
-    .card-desc { font-size:0.75rem; color:var(--text-light); line-height:1.5; }
-    .card-bottom {
-      display:flex; align-items:center; justify-content:space-between; margin-top:auto;
-    }
-    .card-price { font-family:'Baloo 2',cursive; font-weight:700; font-size:1.1rem; }
-    .card-btn {
-      display:flex; align-items:center; gap:5px;
-      font-size:0.75rem; font-weight:600; padding:8px 16px;
-      border-radius:20px; text-decoration:none; transition:all 0.2s;
-      letter-spacing:0.04em;
-    }
-    .card-btn:hover { transform:translateX(2px) scale(1.04); }
+  label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--green-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
 
-    /* THEMES */
-    .theme-saffron .card-icon{background:rgba(255,107,0,0.15);}
-    .theme-saffron .card::before{background:linear-gradient(90deg,var(--saffron),var(--saffron-light));}
-    .theme-saffron .card-price{color:var(--saffron-light);}
-    .theme-saffron .card-btn{background:rgba(255,107,0,0.15);color:var(--saffron-light);border:1px solid rgba(255,107,0,0.25);}
-    .theme-saffron .card-btn:hover{background:var(--saffron);color:white;}
-    .theme-saffron .dot{background:var(--saffron);}
+  input, select, textarea {
+    border: 1.5px solid #b2dfb2;
+    border-radius: 6px;
+    padding: 8px 10px;
+    font-size: 0.9rem;
+    font-family: inherit;
+    color: var(--text-dark);
+    background: var(--green-pale);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+  }
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--green-mid);
+    box-shadow: 0 0 0 3px rgba(26,122,48,0.15);
+    background: #fff;
+  }
 
-    .theme-blue .card-icon{background:rgba(56,139,253,0.15);}
-    .theme-blue .card::before{background:linear-gradient(90deg,#388BFD,#79B8FF);}
-    .theme-blue .card-price{color:#79B8FF;}
-    .theme-blue .card-btn{background:rgba(56,139,253,0.15);color:#79B8FF;border:1px solid rgba(56,139,253,0.25);}
-    .theme-blue .card-btn:hover{background:#388BFD;color:white;}
-    .theme-blue .dot{background:#388BFD;}
+  .photo-upload-area {
+    border: 2px dashed var(--green-mid);
+    border-radius: 8px;
+    padding: 14px;
+    text-align: center;
+    background: var(--green-pale);
+    cursor: pointer;
+    position: relative;
+  }
+  .photo-upload-area input[type="file"] {
+    position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
+  }
+  .photo-upload-area .upload-icon { font-size: 1.6rem; display: block; margin-bottom: 4px; }
+  .photo-upload-area p { font-size: 0.75rem; color: var(--green-dark); font-weight: 600; }
+  #photo-preview {
+    width: 70px; height: 80px; object-fit: cover;
+    border-radius: 5px; border: 2px solid var(--green-mid);
+    display: none; margin: 5px auto 0;
+  }
 
-    .theme-green .card-icon{background:rgba(0,179,82,0.15);}
-    .theme-green .card::before{background:linear-gradient(90deg,var(--green),var(--green-light));}
-    .theme-green .card-price{color:var(--green-light);}
-    .theme-green .card-btn{background:rgba(0,179,82,0.15);color:var(--green-light);border:1px solid rgba(0,179,82,0.25);}
-    .theme-green .card-btn:hover{background:var(--green);color:white;}
-    .theme-green .dot{background:var(--green);}
+  .generate-btn {
+    display: block;
+    margin: 18px auto 0;
+    padding: 12px 44px;
+    background: linear-gradient(135deg, var(--green-dark), var(--green-mid));
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 4px 18px rgba(13,79,28,0.5);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .generate-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(13,79,28,0.6);
+  }
 
-    .theme-purple .card-icon{background:rgba(163,113,247,0.15);}
-    .theme-purple .card::before{background:linear-gradient(90deg,#A371F7,#C9A0FF);}
-    .theme-purple .card-price{color:#C9A0FF;}
-    .theme-purple .card-btn{background:rgba(163,113,247,0.15);color:#C9A0FF;border:1px solid rgba(163,113,247,0.25);}
-    .theme-purple .card-btn:hover{background:#A371F7;color:white;}
-    .theme-purple .dot{background:#A371F7;}
+  /* ===== CARD PREVIEW SECTION ===== */
+  #card-preview-section {
+    display: none;
+    animation: fadeIn 0.5s ease;
+  }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-    .theme-gold .card-icon{background:rgba(245,197,24,0.15);}
-    .theme-gold .card::before{background:linear-gradient(90deg,#D4A017,var(--gold));}
-    .theme-gold .card-price{color:var(--gold);}
-    .theme-gold .card-btn{background:rgba(245,197,24,0.15);color:var(--gold);border:1px solid rgba(245,197,24,0.25);}
-    .theme-gold .card-btn:hover{background:#D4A017;color:white;}
-    .theme-gold .dot{background:var(--gold);}
+  .card-preview-title {
+    color: #e8f5e9;
+    text-align: center;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1rem;
+    margin-bottom: 16px;
+    letter-spacing: 2px;
+    font-weight: 500;
+    text-transform: uppercase;
+  }
 
-    /* NO RESULTS */
-    .no-results {
-      text-align:center; padding:60px 20px;
-      color:var(--text-light); font-size:15px; display:none;
-    }
-    .no-results .icon { font-size:48px; margin-bottom:12px; }
+  .cards-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
 
-    /* WHATSAPP */
-    .wa-float { position:fixed; bottom:28px; right:28px; z-index:9999; text-decoration:none; }
-    .wa-btn {
-      width:58px; height:58px; border-radius:50%;
-      background:#25d366; display:flex; align-items:center; justify-content:center;
-      font-size:28px; box-shadow:0 6px 24px rgba(37,211,102,0.5);
-      animation:waPulse 2s ease-in-out infinite; transition:transform 0.2s;
-    }
-    .wa-btn:hover { transform:scale(1.1); }
-    @keyframes waPulse{0%,100%{box-shadow:0 6px 24px rgba(37,211,102,0.5),0 0 0 0 rgba(37,211,102,0.4);}50%{box-shadow:0 6px 24px rgba(37,211,102,0.5),0 0 0 12px rgba(37,211,102,0);}}
-    .wa-tooltip {
-      position:absolute; right:70px; top:50%; transform:translateY(-50%);
-      background:#1a1a1a; color:white; font-size:12px; font-weight:600;
-      padding:7px 14px; border-radius:8px; white-space:nowrap;
-      opacity:0; pointer-events:none; transition:opacity 0.2s;
-    }
-    .wa-float:hover .wa-tooltip { opacity:1; }
-    .wa-tooltip::after {
-      content:''; position:absolute; left:100%; top:50%; transform:translateY(-50%);
-      border:6px solid transparent; border-left-color:#1a1a1a;
-    }
+  /* =============================================
+     PVC CARD: Standard Credit Card = 85.6 x 54 mm
+     At 96dpi: 85.6mm = 323px, 54mm = 204px
+     ============================================= */
+  .pvc-card {
+    width: 323px;
+    height: 204px;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.45), 0 2px 6px rgba(0,0,0,0.2);
+    flex-shrink: 0;
+  }
 
-    /* BACK TO TOP */
-    .back-top {
-      position:fixed; bottom:96px; right:30px; z-index:999;
-      width:42px; height:42px; border-radius:50%;
-      background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2);
-      color:white; font-size:18px; cursor:pointer;
-      display:flex; align-items:center; justify-content:center;
-      opacity:0; pointer-events:none; transition:all 0.3s;
-    }
-    .back-top.show { opacity:1; pointer-events:all; }
-    .back-top:hover { background:rgba(255,107,0,0.3); }
+  /* ===== FRONT CARD ===== */
+  #card-front {
+    background: linear-gradient(160deg, #f8fdf8 0%, #ffffff 50%, #f0faf0 100%);
+    display: flex;
+    flex-direction: column;
+  }
 
-    /* FOOTER */
-    footer {
-      position:relative; z-index:1; text-align:center;
-      padding:28px 24px; color:var(--text-light); font-size:0.8rem;
-      border-top:1px solid rgba(255,255,255,0.06);
-    }
-    footer a { color:var(--saffron-light); text-decoration:none; }
+  /* Decorative pattern overlay */
+  #card-front::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 14px,
+      rgba(40,167,69,0.03) 14px,
+      rgba(40,167,69,0.03) 15px
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
 
-    /* ANIMATIONS */
-    @keyframes fadeDown{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:translateY(0)}}
-    @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-    @keyframes cardIn{from{opacity:0;transform:translateY(20px) scale(0.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+  /* Green accent strip on left */
+  #card-front::after {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, var(--green-mid), var(--green-dark), var(--green-mid));
+    z-index: 1;
+  }
 
-    @media(max-width:640px){
-      nav{display:none;}
-      .grid{grid-template-columns:1fr 1fr;}
-    }
-    @media(max-width:420px){
-      .grid{grid-template-columns:1fr;}
-    }
-  </style>
+  .front-header {
+    background: linear-gradient(90deg, #0a3d14 0%, #1a7a30 50%, #0a3d14 100%);
+    padding: 5px 8px 5px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    z-index: 2;
+  }
+
+  .front-logo-area {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .logo-emblem {
+    width: 26px; height: 26px;
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+    border-radius: 50% 0 50% 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    border: 1.5px solid rgba(255,255,255,0.35);
+    flex-shrink: 0;
+  }
+
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+  }
+  .brand-name {
+    color: #fff;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+  .brand-name span { color: var(--gold); }
+  .brand-sub {
+    color: rgba(165,214,167,0.9);
+    font-size: 0.42rem;
+    letter-spacing: 0.5px;
+    font-weight: 400;
+  }
+
+  .front-title-block {
+    text-align: right;
+  }
+  .card-type-hi {
+    color: var(--gold);
+    font-family: 'Noto Sans Devanagari', sans-serif;
+    font-size: 0.62rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+  .card-type-en {
+    color: rgba(255,255,255,0.8);
+    font-size: 0.5rem;
+    letter-spacing: 0.5px;
+  }
+
+  /* GOV STRIP */
+  .gov-strip {
+    background: linear-gradient(90deg, #e8f5e9, #f1f8f1, #e8f5e9);
+    border-left: 3px solid var(--green-mid);
+    padding: 2px 8px 2px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 2;
+    position: relative;
+    border-bottom: 1px solid #c8e6c9;
+  }
+  .gov-strip-text {
+    color: var(--green-dark);
+    font-size: 0.42rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .gov-strip-right {
+    color: var(--green-mid);
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.5rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  .front-body {
+    flex: 1;
+    display: flex;
+    gap: 8px;
+    padding: 7px 8px 7px 12px;
+    position: relative;
+    z-index: 2;
+    background: transparent;
+  }
+
+  .photo-col {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .front-photo {
+    width: 56px;
+    height: 66px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 2px solid var(--green-mid);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    display: none;
+  }
+  .front-photo-placeholder {
+    width: 56px;
+    height: 66px;
+    background: linear-gradient(135deg, #c8e6c9, #a5d6a7);
+    border-radius: 4px;
+    border: 2px solid var(--green-mid);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+  }
+
+  .info-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .farmer-name-en {
+    color: var(--green-dark);
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    line-height: 1.1;
+    text-transform: uppercase;
+  }
+  .farmer-name-hi {
+    color: var(--green-mid);
+    font-family: 'Noto Sans Devanagari', sans-serif;
+    font-size: 0.62rem;
+    font-weight: 600;
+    margin-bottom: 3px;
+    line-height: 1.2;
+  }
+
+  .f-row {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    line-height: 1.15;
+  }
+  .f-label {
+    color: var(--green-dark);
+    font-size: 0.48rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+  }
+  .f-val {
+    color: #1a3a1a;
+    font-size: 0.52rem;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .qr-col {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 2px;
+  }
+  .front-qr {
+    width: 46px; height: 46px;
+    background: #fff;
+    border-radius: 3px;
+    border: 1px solid #c8e6c9;
+    padding: 1px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .front-qr canvas { width: 44px !important; height: 44px !important; }
+  .front-qr img { width: 44px !important; height: 44px !important; }
+  .qr-label {
+    color: #888;
+    font-size: 0.38rem;
+    letter-spacing: 0.5px;
+    text-align: center;
+  }
+
+  .front-footer {
+    background: linear-gradient(90deg, #0a3d14 0%, #1a7a30 50%, #0a3d14 100%);
+    padding: 4px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+  .footer-id {
+    color: var(--gold);
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+  }
+  .footer-label {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.42rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .alw-logo-seal {
+    width: 34px; height: 34px;
+    background: radial-gradient(circle at 40% 35%, #f5c842, #c8840b);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(255,255,255,0.6);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4), inset 0 1px 2px rgba(255,255,255,0.3);
+    flex-shrink: 0;
+  }
+  .alw-logo-seal .alw-text {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 1px;
+    line-height: 1;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  }
+
+  /* ===== BACK CARD ===== */
+  #card-back {
+    background: linear-gradient(160deg, #f8fdf8 0%, #ffffff 50%, #f0faf0 100%);
+    display: flex;
+    flex-direction: column;
+  }
+
+  #card-back::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 14px,
+      rgba(40,167,69,0.03) 14px,
+      rgba(40,167,69,0.03) 15px
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .back-header {
+    background: linear-gradient(90deg, #0a3d14 0%, #1a7a30 50%, #0a3d14 100%);
+    padding: 5px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+  .back-header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+  .back-header-label {
+    color: rgba(255,255,255,0.7);
+    font-size: 0.42rem;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+  }
+  .enrollment-id-val {
+    color: var(--gold);
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+
+  .back-header-right {
+    text-align: right;
+  }
+  .back-brand {
+    color: #fff;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+  .back-brand span { color: var(--gold); }
+  .back-brand-sub {
+    color: rgba(165,214,167,0.7);
+    font-size: 0.38rem;
+  }
+
+  .back-body {
+    flex: 1;
+    padding: 6px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .addr-block {
+    background: linear-gradient(90deg, #e8f5e9, #f1f8f1);
+    border-left: 3px solid var(--green-mid);
+    border-radius: 0 4px 4px 0;
+    padding: 4px 6px;
+  }
+  .addr-title {
+    color: var(--green-dark);
+    font-size: 0.46rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+  }
+  .addr-val {
+    color: #2a4a2a;
+    font-size: 0.5rem;
+    line-height: 1.3;
+    font-weight: 500;
+  }
+
+  .land-title {
+    color: var(--green-dark);
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1.5px solid var(--green-light);
+    padding-bottom: 2px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .land-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--green-mid), transparent);
+  }
+
+  .land-tbl {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.42rem;
+  }
+  .land-tbl th {
+    background: var(--green-dark);
+    color: #fff;
+    padding: 2.5px 2px;
+    text-align: center;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    font-size: 0.4rem;
+    line-height: 1.2;
+  }
+  .land-tbl td {
+    border: 0.5px solid #c8e6c9;
+    padding: 2px 2px;
+    text-align: center;
+    color: #1a3a1a;
+    font-size: 0.42rem;
+    background: #fff;
+    line-height: 1.2;
+  }
+  .land-tbl tr:nth-child(even) td { background: #f0faf0; }
+
+  .annexure-block {
+    background: #f0faf0;
+    border: 0.5px solid #c8e6c9;
+    border-radius: 4px;
+    padding: 4px 6px;
+    font-size: 0.4rem;
+    color: #4a6a4a;
+    line-height: 1.4;
+  }
+  .annexure-block strong {
+    color: var(--green-dark);
+    font-size: 0.46rem;
+    display: block;
+    margin-bottom: 1px;
+  }
+
+  .back-footer {
+    background: linear-gradient(90deg, #0a3d14, #1a7a30, #0a3d14);
+    padding: 3px 8px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+  .back-footer-text {
+    color: rgba(255,255,255,0.65);
+    font-size: 0.4rem;
+    letter-spacing: 0.3px;
+    font-style: italic;
+  }
+
+  /* ===== CARD SIZE LABEL ===== */
+  .size-note {
+    color: rgba(165,214,167,0.6);
+    font-size: 0.72rem;
+    text-align: center;
+    margin-top: -8px;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+  }
+
+  /* DOWNLOAD BTN */
+  .download-btn {
+    display: block;
+    margin: 8px auto 24px;
+    padding: 11px 36px;
+    background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(200,132,11,0.45);
+    transition: transform 0.15s;
+  }
+  .download-btn:hover { transform: translateY(-2px); }
+
+  @media (max-width: 600px) {
+    .form-grid { grid-template-columns: 1fr; }
+    .form-section { padding: 16px 14px; }
+    .pvc-card { transform: scale(0.92); transform-origin: center top; }
+  }
+
+  /* ===== AUTH PAGES ===== */
+  #auth-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  .auth-box {
+    background: rgba(255,255,255,0.97);
+    border-radius: 18px;
+    padding: 36px 32px 28px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.45);
+    border: 1.5px solid rgba(40,167,69,0.3);
+    text-align: center;
+  }
+  .auth-logo {
+    width: 64px; height: 64px;
+    background: linear-gradient(135deg, #f0b429, #c8840b);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.05rem; font-weight: 700; color: #fff;
+    margin: 0 auto 10px;
+    box-shadow: 0 4px 14px rgba(240,180,41,0.5);
+    letter-spacing: 1px;
+  }
+  .auth-brand {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.2rem; font-weight: 700;
+    color: var(--green-dark);
+    letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+  .auth-brand span { color: var(--gold-dark); }
+  .auth-subtitle { font-size: 0.78rem; color: #777; margin-bottom: 22px; }
+  .auth-tabs {
+    display: flex; border-radius: 10px; overflow: hidden;
+    border: 1.5px solid #b2dfb2; margin-bottom: 24px;
+  }
+  .auth-tab {
+    flex: 1; padding: 9px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.9rem; font-weight: 600;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    cursor: pointer; border: none; background: #f0f0f0; color: #666;
+    transition: all 0.2s;
+  }
+  .auth-tab.active {
+    background: linear-gradient(135deg, var(--green-dark), var(--green-mid));
+    color: #fff;
+  }
+  .auth-form { }
+  .auth-form.active { }
+  .auth-group { text-align: left; margin-bottom: 14px; }
+  .auth-group label {
+    display: block; font-size: 0.72rem; font-weight: 600;
+    color: var(--green-dark); text-transform: uppercase;
+    letter-spacing: 0.5px; margin-bottom: 4px;
+  }
+  .auth-group input {
+    width: 100%; padding: 10px 12px;
+    border: 1.5px solid #b2dfb2; border-radius: 8px;
+    font-size: 0.92rem; background: var(--green-pale);
+    color: var(--text-dark); outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    font-family: inherit;
+  }
+  .auth-group input:focus {
+    border-color: var(--green-mid);
+    box-shadow: 0 0 0 3px rgba(26,122,48,0.15);
+    background: #fff;
+  }
+  .auth-btn {
+    width: 100%; padding: 11px;
+    background: linear-gradient(135deg, var(--green-dark), var(--green-mid));
+    color: #fff; border: none; border-radius: 50px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1rem; font-weight: 600;
+    letter-spacing: 2px; text-transform: uppercase;
+    cursor: pointer; margin-top: 6px;
+    box-shadow: 0 4px 18px rgba(13,79,28,0.4);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .auth-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(13,79,28,0.5); }
+  .auth-msg {
+    font-size: 0.82rem; margin-top: 10px;
+    font-weight: 600; display: none; padding: 8px 12px;
+    border-radius: 6px;
+  }
+  .auth-msg.error { color: #c0392b; background: #fdecea; display: block; }
+  .auth-msg.success { color: #1a7a30; background: #eaf5ea; display: block; }
+  .auth-footer { margin-top: 18px; font-size: 0.72rem; color: #999; }
+
+  /* ===== DASHBOARD ===== */
+  #dashboard-page { display: none; }
+  .dash-header {
+    background: rgba(255,255,255,0.97);
+    border-radius: 14px;
+    padding: 16px 22px;
+    margin-bottom: 20px;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 12px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.2);
+    border: 1.5px solid rgba(40,167,69,0.25);
+  }
+  .dash-user-info { display: flex; align-items: center; gap: 12px; }
+  .dash-avatar {
+    width: 46px; height: 46px;
+    background: linear-gradient(135deg, #f0b429, #c8840b);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1rem; font-weight: 700; color: #fff;
+    box-shadow: 0 3px 10px rgba(240,180,41,0.4);
+    letter-spacing: 1px;
+  }
+  .dash-welcome { font-family: 'Oswald', sans-serif; }
+  .dash-welcome .greet { font-size: 0.75rem; color: #888; letter-spacing: 1px; text-transform: uppercase; }
+  .dash-welcome .uname { font-size: 1.1rem; font-weight: 700; color: var(--green-dark); letter-spacing: 1px; }
+  .dash-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+  .dash-btn {
+    padding: 8px 18px; border-radius: 50px; border: none;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.82rem; font-weight: 600;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    cursor: pointer; transition: transform 0.15s;
+  }
+  .dash-btn:hover { transform: translateY(-2px); }
+  .dash-btn.primary {
+    background: linear-gradient(135deg, var(--green-dark), var(--green-mid));
+    color: #fff;
+    box-shadow: 0 3px 12px rgba(13,79,28,0.35);
+  }
+  .dash-btn.danger {
+    background: linear-gradient(135deg, #c0392b, #e74c3c);
+    color: #fff;
+    box-shadow: 0 3px 12px rgba(192,57,43,0.35);
+  }
+
+  /* Stats cards */
+  .dash-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 14px;
+    margin-bottom: 22px;
+  }
+  .stat-card {
+    background: rgba(255,255,255,0.97);
+    border-radius: 12px;
+    padding: 18px 16px;
+    text-align: center;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    border: 1.5px solid rgba(40,167,69,0.2);
+  }
+  .stat-icon { font-size: 1.8rem; margin-bottom: 6px; }
+  .stat-value {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.8rem; font-weight: 700;
+    color: var(--green-dark); line-height: 1;
+  }
+  .stat-label { font-size: 0.72rem; color: #777; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+  /* Card History Table */
+  .dash-section-title {
+    color: #e8f5e9;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1rem; font-weight: 600;
+    letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 12px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .history-wrap {
+    background: rgba(255,255,255,0.97);
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.2);
+    border: 1.5px solid rgba(40,167,69,0.25);
+    margin-bottom: 22px;
+    overflow-x: auto;
+  }
+  .history-empty {
+    text-align: center; padding: 32px;
+    color: #aaa; font-size: 0.9rem;
+  }
+  .history-empty .empty-icon { font-size: 2.5rem; display: block; margin-bottom: 8px; }
+  .hist-table {
+    width: 100%; border-collapse: collapse;
+    font-size: 0.82rem;
+  }
+  .hist-table th {
+    background: var(--green-dark); color: #fff;
+    padding: 10px 12px; text-align: left;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.78rem; letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .hist-table th:first-child { border-radius: 6px 0 0 0; }
+  .hist-table th:last-child { border-radius: 0 6px 0 0; }
+  .hist-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #e8f5e8;
+    color: var(--text-dark);
+    vertical-align: middle;
+  }
+  .hist-table tr:last-child td { border-bottom: none; }
+  .hist-table tr:hover td { background: #f0fbf0; }
+  .badge {
+    display: inline-block; padding: 3px 10px;
+    border-radius: 50px; font-size: 0.72rem; font-weight: 600;
+  }
+  .badge-m { background: #d4edda; color: #155724; }
+  .badge-f { background: #fce4ec; color: #880e4f; }
+  .badge-o { background: #fff3cd; color: #856404; }
+
+  /* New card button on dashboard */
+  #main-page { display: none; }
+
+  /* ===== PROFILE MODAL ===== */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.6); z-index: 9999;
+    align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  .modal-overlay.active { display: flex; }
+  .modal-box {
+    background: #fff; border-radius: 18px;
+    width: 100%; max-width: 420px;
+    box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+    overflow: hidden; animation: fadeIn 0.3s ease;
+  }
+  .modal-header {
+    background: linear-gradient(135deg, #0d4f1c, #1a7a30);
+    padding: 20px 24px; display: flex;
+    align-items: center; justify-content: space-between;
+  }
+  .modal-title {
+    color: #fff; font-family: 'Oswald', sans-serif;
+    font-size: 1.1rem; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+  }
+  .modal-close {
+    color: rgba(255,255,255,0.8); background: none;
+    border: none; font-size: 1.4rem; cursor: pointer;
+    line-height: 1; padding: 0;
+  }
+  .modal-body { padding: 24px; }
+  .modal-group { margin-bottom: 14px; text-align: left; }
+  .modal-group label {
+    display: block; font-size: 0.72rem; font-weight: 600;
+    color: var(--green-dark); text-transform: uppercase;
+    letter-spacing: 0.5px; margin-bottom: 4px;
+  }
+  .modal-group input {
+    width: 100%; padding: 10px 12px;
+    border: 1.5px solid #b2dfb2; border-radius: 8px;
+    font-size: 0.92rem; background: var(--green-pale);
+    color: var(--text-dark); outline: none; font-family: inherit;
+    box-sizing: border-box;
+  }
+  .modal-group input:focus {
+    border-color: var(--green-mid);
+    box-shadow: 0 0 0 3px rgba(26,122,48,0.15);
+    background: #fff;
+  }
+  .modal-divider {
+    border: none; border-top: 1.5px dashed #c8e6c9;
+    margin: 16px 0;
+  }
+  .modal-section-label {
+    font-size: 0.72rem; font-weight: 700; color: var(--gold-dark);
+    text-transform: uppercase; letter-spacing: 1px;
+    margin-bottom: 12px; display: flex; align-items: center; gap: 6px;
+  }
+  .modal-btn {
+    width: 100%; padding: 11px;
+    background: linear-gradient(135deg, var(--green-dark), var(--green-mid));
+    color: #fff; border: none; border-radius: 50px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1rem; font-weight: 600;
+    letter-spacing: 2px; text-transform: uppercase;
+    cursor: pointer; margin-top: 4px;
+    box-shadow: 0 4px 18px rgba(13,79,28,0.4);
+    transition: transform 0.15s;
+  }
+  .modal-btn:hover { transform: translateY(-2px); }
+  .modal-msg {
+    font-size: 0.82rem; margin-top: 10px; font-weight: 600;
+    padding: 8px 12px; border-radius: 6px; display: none; text-align: center;
+  }
+  .modal-msg.error { color: #c0392b; background: #fdecea; display: block; }
+  .modal-msg.success { color: #1a7a30; background: #eaf5ea; display: block; }
+
+
+  /* ===== AUTH PAGE ===== */
+  #auth-page {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  .auth-box {
+    background: rgba(255,255,255,0.97);
+    border-radius: 18px;
+    padding: 36px 32px 28px;
+    width: 100%; max-width: 420px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.45);
+    border: 1.5px solid rgba(40,167,69,0.3);
+    text-align: center;
+  }
+  .auth-logo {
+    width: 64px; height: 64px;
+    background: linear-gradient(135deg, #f0b429, #c8840b);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.05rem; font-weight: 700; color: #fff;
+    margin: 0 auto 10px;
+    box-shadow: 0 4px 14px rgba(240,180,41,0.5);
+    letter-spacing: 1px;
+  }
+  .auth-brand {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.2rem; font-weight: 700;
+    color: var(--green-dark); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 3px;
+  }
+  .auth-brand span { color: var(--gold-dark); }
+  .auth-subtitle { font-size: 0.78rem; color: #777; margin-bottom: 22px; }
+  .auth-tabs {
+    display: flex; border-radius: 10px; overflow: hidden;
+    border: 1.5px solid #b2dfb2; margin-bottom: 24px;
+  }
+  .auth-tab {
+    flex: 1; padding: 9px;
+    font-family: 'Oswald', sans-serif; font-size: 0.9rem; font-weight: 600;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    cursor: pointer; border: none; background: #f0f0f0; color: #666; transition: all 0.2s;
+  }
+  .auth-tab.active { background: linear-gradient(135deg, var(--green-dark), var(--green-mid)); color: #fff; }
+  .auth-group { text-align: left; margin-bottom: 14px; }
+  .auth-group label {
+    display: block; font-size: 0.72rem; font-weight: 600;
+    color: var(--green-dark); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;
+  }
+  .auth-group input {
+    width: 100%; padding: 10px 12px;
+    border: 1.5px solid #b2dfb2; border-radius: 8px;
+    font-size: 0.92rem; background: var(--green-pale);
+    color: var(--text-dark); outline: none; font-family: inherit;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .auth-group input:focus { border-color: var(--green-mid); box-shadow: 0 0 0 3px rgba(26,122,48,0.15); background: #fff; }
+  .auth-btn {
+    width: 100%; padding: 11px;
+    background: linear-gradient(135deg, var(--green-dark), var(--green-mid));
+    color: #fff; border: none; border-radius: 50px;
+    font-family: 'Oswald', sans-serif; font-size: 1rem; font-weight: 600;
+    letter-spacing: 2px; text-transform: uppercase;
+    cursor: pointer; margin-top: 6px;
+    box-shadow: 0 4px 18px rgba(13,79,28,0.4); transition: transform 0.15s;
+  }
+  .auth-btn:hover { transform: translateY(-2px); }
+  .auth-msg {
+    font-size: 0.82rem; margin-top: 10px; font-weight: 600;
+    padding: 8px 12px; border-radius: 6px; display: none;
+  }
+  .auth-msg.error { color: #c0392b; background: #fdecea; display: block; }
+  .auth-msg.success { color: #1a7a30; background: #eaf5ea; display: block; }
+  .auth-footer { margin-top: 18px; font-size: 0.72rem; color: #999; }
+
+  /* ===== DASHBOARD ===== */
+  #dashboard-page { display: none; }
+  .dash-header {
+    background: rgba(255,255,255,0.97); border-radius: 14px;
+    padding: 16px 22px; margin-bottom: 20px;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.2); border: 1.5px solid rgba(40,167,69,0.25);
+  }
+  .dash-user-info { display: flex; align-items: center; gap: 12px; }
+  .dash-avatar {
+    width: 46px; height: 46px;
+    background: linear-gradient(135deg, #f0b429, #c8840b);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-family: 'Oswald', sans-serif; font-size: 1rem; font-weight: 700; color: #fff;
+    box-shadow: 0 3px 10px rgba(240,180,41,0.4);
+  }
+  .dash-welcome .greet { font-size: 0.75rem; color: #888; letter-spacing: 1px; text-transform: uppercase; }
+  .dash-welcome .uname { font-size: 1.1rem; font-weight: 700; color: var(--green-dark); font-family: 'Oswald', sans-serif; }
+  .dash-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+  .dash-btn {
+    padding: 8px 18px; border-radius: 50px; border: none;
+    font-family: 'Oswald', sans-serif; font-size: 0.82rem; font-weight: 600;
+    letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; transition: transform 0.15s;
+  }
+  .dash-btn:hover { transform: translateY(-2px); }
+  .dash-btn.primary { background: linear-gradient(135deg, var(--green-dark), var(--green-mid)); color: #fff; box-shadow: 0 3px 12px rgba(13,79,28,0.35); }
+  .dash-btn.danger  { background: linear-gradient(135deg, #c0392b, #e74c3c); color: #fff; box-shadow: 0 3px 12px rgba(192,57,43,0.35); }
+  .dash-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 14px; margin-bottom: 22px; }
+  .stat-card {
+    background: rgba(255,255,255,0.97); border-radius: 12px; padding: 18px 16px;
+    text-align: center; box-shadow: 0 4px 16px rgba(0,0,0,0.15); border: 1.5px solid rgba(40,167,69,0.2);
+  }
+  .stat-icon { font-size: 1.8rem; margin-bottom: 6px; }
+  .stat-value { font-family: 'Oswald', sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--green-dark); line-height: 1; }
+  .stat-label { font-size: 0.72rem; color: #777; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .dash-section-title {
+    color: #e8f5e9; font-family: 'Oswald', sans-serif; font-size: 1rem; font-weight: 600;
+    letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px;
+  }
+  .history-wrap {
+    background: rgba(255,255,255,0.97); border-radius: 14px; padding: 20px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.2); border: 1.5px solid rgba(40,167,69,0.25);
+    margin-bottom: 22px; overflow-x: auto;
+  }
+  .history-empty { text-align: center; padding: 32px; color: #aaa; font-size: 0.9rem; }
+  .history-empty .empty-icon { font-size: 2.5rem; display: block; margin-bottom: 8px; }
+  .hist-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+  .hist-table th {
+    background: var(--green-dark); color: #fff; padding: 10px 12px; text-align: left;
+    font-family: 'Oswald', sans-serif; font-size: 0.78rem; letter-spacing: 1px; text-transform: uppercase;
+  }
+  .hist-table td { padding: 10px 12px; border-bottom: 1px solid #e8f5e8; color: var(--text-dark); vertical-align: middle; }
+  .hist-table tr:last-child td { border-bottom: none; }
+  .hist-table tr:hover td { background: #f0fbf0; }
+  .badge { display: inline-block; padding: 3px 10px; border-radius: 50px; font-size: 0.72rem; font-weight: 600; }
+  .badge-m { background: #d4edda; color: #155724; }
+  .badge-f { background: #fce4ec; color: #880e4f; }
+  .badge-o { background: #fff3cd; color: #856404; }
+
+  #main-page { display: none; }
+  .back-to-dash {
+    max-width: 900px; margin: 0 auto 14px;
+  }
+  .back-to-dash button {
+    background: rgba(255,255,255,0.15); border: 1.5px solid rgba(255,255,255,0.4);
+    color: #fff; padding: 8px 20px; border-radius: 50px;
+    font-family: 'Oswald', sans-serif; font-size: 0.85rem; letter-spacing: 2px;
+    cursor: pointer; text-transform: uppercase;
+  }
+
+  /* ===== PDF AUTO-FILL SECTION ===== */
+  .pdf-autofill-section {
+    background: linear-gradient(135deg, rgba(240,180,41,0.12), rgba(13,79,28,0.08));
+    border: 2px dashed var(--gold);
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin-bottom: 22px;
+    box-shadow: 0 4px 20px rgba(240,180,41,0.15);
+    position: relative;
+    overflow: hidden;
+  }
+  .pdf-autofill-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #f0b429, #c8840b);
+    color: #fff;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    padding: 3px 10px;
+    border-radius: 50px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .pdf-autofill-title {
+    color: var(--green-dark);
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border-left: 4px solid var(--gold);
+    padding-left: 10px;
+    margin-bottom: 6px;
+  }
+  .pdf-autofill-subtitle {
+    color: #555;
+    font-size: 0.8rem;
+    margin-bottom: 16px;
+    margin-left: 14px;
+  }
+  .pdf-drop-zone {
+    border: 2px dashed #c8840b;
+    border-radius: 10px;
+    padding: 22px 16px;
+    text-align: center;
+    background: rgba(255,255,255,0.7);
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+  .pdf-drop-zone:hover { background: rgba(240,180,41,0.1); border-color: var(--gold-dark); transform: scale(1.01); }
+  .pdf-drop-zone input[type="file"] {
+    position: absolute; inset: 0; opacity: 0;
+    cursor: pointer; width: 100%; height: 100%;
+    background: transparent; border: none; padding: 0;
+  }
+  .pdf-drop-icon { font-size: 2.2rem; display: block; margin-bottom: 6px; }
+  .pdf-drop-text { font-size: 0.9rem; font-weight: 700; color: var(--green-dark); }
+  .pdf-drop-sub  { font-size: 0.72rem; color: #888; margin-top: 3px; }
+  .pdf-loading-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(7,26,9,0.87); z-index: 99999;
+    align-items: center; justify-content: center;
+    flex-direction: column; gap: 18px;
+  }
+  .pdf-loading-overlay.active { display: flex; }
+  .pdf-loading-spinner {
+    width: 58px; height: 58px;
+    border: 5px solid rgba(240,180,41,0.3);
+    border-top-color: var(--gold);
+    border-radius: 50%;
+    animation: pdfSpin 0.85s linear infinite;
+  }
+  @keyframes pdfSpin { to { transform: rotate(360deg); } }
+  .pdf-loading-text { color: #fff; font-family: 'Oswald', sans-serif; font-size: 1.1rem; letter-spacing: 2px; text-align: center; }
+  .pdf-loading-step { color: var(--gold); font-size: 0.82rem; letter-spacing: 1px; text-align: center; max-width: 290px; }
+  .pdf-success-toast {
+    display: none; background: linear-gradient(135deg, #0d4f1c, #1a7a30);
+    color: #fff; padding: 12px 20px; border-radius: 50px;
+    font-family: 'Oswald', sans-serif; font-size: 0.88rem;
+    letter-spacing: 1.5px; text-align: center; margin-top: 12px;
+    box-shadow: 0 4px 18px rgba(13,79,28,0.4);
+  }
+  .pdf-success-toast.show { display: block; animation: fadeIn 0.4s ease; }
 </head>
 <body>
 
-<!-- TICKER -->
-<div class="ticker-bar">
-  <div class="ticker-inner">
-    <span class="ticker-label">⚡ LIVE</span>
-    <div class="ticker-scroll">
-      <span class="ticker-text">
-        🚨 22nd PM-KISAN Installment 13 March 2026 ko release hogi! &nbsp;&nbsp;&nbsp;
-        ⚠️ eKYC MANDATORY hai — abhi karwayein &nbsp;&nbsp;&nbsp;
-        📞 Madad ke liye call karein: 8461246946 — Rakesh Sharma, Lucknow &nbsp;&nbsp;&nbsp;
-        🌾 PM KISAN Registration, eKYC, Farmer Registry — Sab ek jagah! &nbsp;&nbsp;&nbsp;
-      </span>
+<!-- ========== AUTH PAGE ========== -->
+<div id="auth-page" style="display:none;">
+  <div class="auth-box">
+    <div class="auth-logo">AWO</div>
+    <div class="auth-brand">All Work <span>Online</span></div>
+    <div class="auth-subtitle">AgriStack Farmer ID Card Generator</div>
+    <div class="auth-tabs" id="auth-tabs-bar">
+      <button class="auth-tab active" id="tab-login"  onclick="switchTab('login')">&#128275; Login</button>
+      <button class="auth-tab"        id="tab-signup" onclick="switchTab('signup')">&#128100; Sign Up</button>
+    </div>
+    <div id="forgot-title" style="display:none;margin-bottom:16px;">
+      <h3 style="font-family:Oswald,sans-serif;color:var(--green-dark);font-size:1.1rem;letter-spacing:1px;">&#128273; FORGOT PASSWORD</h3>
+    </div>
+    <!-- LOGIN -->
+    <div id="form-login" style="display:block;">
+      <div class="auth-group"><label>Username / यूज़रनेम</label><input type="text" id="login-user" placeholder="Username dalein..."/></div>
+      <div class="auth-group"><label>Password / पासवर्ड</label><input type="password" id="login-pass" placeholder="Password dalein..." onkeydown="if(event.key==='Enter') doLogin()"/></div>
+      <button class="auth-btn" onclick="doLogin()">&#128275; Login</button>
+      <div style="text-align:right;margin-top:8px;">
+        <a href="#" onclick="switchTab('forgot'); return false;" style="font-size:0.78rem;color:var(--green-mid);text-decoration:none;font-weight:600;">&#128273; Password bhool gaye?</a>
+      </div>
+      <div class="auth-msg" id="login-msg"></div>
+    </div>
+    <!-- SIGNUP -->
+    <div id="form-signup" style="display:none;">
+      <div class="auth-group"><label>Full Name / पूरा नाम</label><input type="text" id="su-name" placeholder="Apna naam dalein..."/></div>
+      <div class="auth-group"><label>Email / ईमेल</label><input type="email" id="su-email" placeholder="Email dalein... (password reset ke liye)"/></div>
+      <div class="auth-group"><label>Mobile No. / मोबाइल</label><input type="tel" id="su-mobile" placeholder="10-digit mobile number" maxlength="10"/></div>
+      <div class="auth-group"><label>Username / यूज़रनेम</label><input type="text" id="su-user" placeholder="Username chunein..."/></div>
+      <div class="auth-group"><label>Password / पासवर्ड</label><input type="password" id="su-pass" placeholder="Password dalein..."/></div>
+      <div class="auth-group"><label>Confirm Password / पासवर्ड दोबारा</label><input type="password" id="su-pass2" placeholder="Password dobara dalein..." onkeydown="if(event.key==='Enter') doSignup()"/></div>
+      <button class="auth-btn" onclick="doSignup()">&#128100; Create Account</button>
+      <div class="auth-msg" id="signup-msg"></div>
+    </div>
+    <!-- FORGOT PASSWORD -->
+    <div id="form-forgot" style="display:none;">
+      <!-- Step 1: Enter username/email -->
+      <div id="forgot-step1">
+        <p style="font-size:0.82rem;color:#555;margin-bottom:16px;text-align:left;">&#128273; Apna registered <strong>Username</strong> ya <strong>Email</strong> dalein — hum aapke email par <strong>OTP code</strong> bhejenge.</p>
+        <div class="auth-group"><label>Username ya Email</label><input type="text" id="forgot-input" placeholder="Username ya Email dalein..."/></div>
+        <button class="auth-btn" onclick="doForgotPassword()">&#128140; OTP Bhejo</button>
+        <div style="text-align:center;margin-top:10px;">
+          <a href="#" onclick="switchTab('login'); return false;" style="font-size:0.78rem;color:var(--green-mid);text-decoration:none;font-weight:600;">&#8592; Login Par Wapas Jao</a>
+        </div>
+      </div>
+      <!-- Step 2: OTP + New Password -->
+      <div id="forgot-step2" style="display:none;">
+        <p style="font-size:0.82rem;color:#27ae60;margin-bottom:14px;text-align:left;">&#128231; OTP aapke email par bhej diya gaya! Neeche dalein.</p>
+        <div class="auth-group"><label>OTP Code (6 digit)</label><input type="text" id="forgot-otp" placeholder="OTP dalein..." maxlength="6" style="letter-spacing:4px;font-size:1.1rem;text-align:center;"/></div>
+        <div class="auth-group"><label>Naya Password</label><input type="password" id="forgot-newpass" placeholder="Naya password dalein..."/></div>
+        <div class="auth-group"><label>Password Confirm Karein</label><input type="password" id="forgot-newpass2" placeholder="Password dobara dalein..."/></div>
+        <button class="auth-btn" onclick="doResetPassword()">&#128274; Password Reset Karein</button>
+        <div style="text-align:center;margin-top:10px;">
+          <a href="#" onclick="backToStep1(); return false;" style="font-size:0.78rem;color:var(--green-mid);text-decoration:none;font-weight:600;">&#8592; Wapas Jao</a>
+        </div>
+      </div>
+      <div class="auth-msg" id="forgot-msg"></div>
+    </div>
+    <div class="auth-footer">&#169; All Work Online | Powered by AgriStack</div>
+  </div>
+</div>
+
+<!-- ========== DASHBOARD ========== -->
+<div id="dashboard-page" style="display:none;">
+<div class="container">
+  <div class="dash-header">
+    <div class="dash-user-info">
+      <div class="dash-avatar" id="dash-avatar-text">U</div>
+      <div class="dash-welcome">
+        <div class="greet">&#128075; Namaste,</div>
+        <div class="uname" id="dash-username">User</div>
+      </div>
+    </div>
+    <div class="dash-actions">
+      <button class="dash-btn primary" onclick="showCardForm()">&#43; Naya Card Banao</button>
+      <button class="dash-btn" style="background:linear-gradient(135deg,#1a5276,#2980b9);color:#fff;box-shadow:0 3px 12px rgba(41,128,185,0.35);" onclick="openProfileModal()">&#9881; Profile</button>
+      <button class="dash-btn danger"  onclick="doLogout()">&#128682; Logout</button>
+    </div>
+  </div>
+  <div class="dash-stats">
+    <div class="stat-card"><div class="stat-icon">&#127806;</div><div class="stat-value" id="stat-total">0</div><div class="stat-label">Total Cards</div></div>
+    <div class="stat-card"><div class="stat-icon">&#128197;</div><div class="stat-value" id="stat-today">0</div><div class="stat-label">Aaj Generate Kiye</div></div>
+    <div class="stat-card"><div class="stat-icon">&#128104;</div><div class="stat-value" id="stat-male">0</div><div class="stat-label">Male Farmers</div></div>
+    <div class="stat-card"><div class="stat-icon">&#128105;</div><div class="stat-value" id="stat-female">0</div><div class="stat-label">Female Farmers</div></div>
+  </div>
+  <div class="dash-section-title">&#128196; Generated Cards History</div>
+  <div class="history-wrap">
+    <div id="history-empty" class="history-empty"><span class="empty-icon">&#127806;</span>Abhi tak koi card generate nahi kiya.<br><strong>"Naya Card Banao"</strong> button dabao!</div>
+    <div id="history-table-wrap" style="display:none;">
+      <table class="hist-table">
+        <thead><tr><th>#</th><th>Farmer Name</th><th>Mobile</th><th>District</th><th>State</th><th>Gender</th><th>Farmer ID</th><th>Date & Time</th><th>Action</th></tr></thead>
+        <tbody id="history-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ========== PROFILE MODAL ========== -->
+<div class="modal-overlay" id="profile-modal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div class="modal-title">&#9881; Profile Update</div>
+      <button class="modal-close" onclick="closeProfileModal()">&#10005;</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-group"><label>Full Name / पूरा नाम</label><input type="text" id="prof-name" placeholder="Aapka naam..."/></div>
+      <div class="modal-group"><label>Email / ईमेल</label><input type="email" id="prof-email" placeholder="Email address..."/></div>
+      <div class="modal-group"><label>Mobile No. / मोबाइल</label><input type="tel" id="prof-mobile" placeholder="10-digit number" maxlength="10"/></div>
+      <button class="modal-btn" onclick="doUpdateProfile()">&#128190; Profile Save Karein</button>
+      <hr class="modal-divider"/>
+      <div class="modal-section-label">&#128274; Password Change Karein</div>
+      <div class="modal-group"><label>Purana Password</label><input type="password" id="prof-oldpass" placeholder="Purana password..."/></div>
+      <div class="modal-group"><label>Naya Password</label><input type="password" id="prof-newpass" placeholder="Naya password (min 6 chars)..."/></div>
+      <div class="modal-group"><label>Naya Password Confirm</label><input type="password" id="prof-newpass2" placeholder="Naya password dobara..."/></div>
+      <button class="modal-btn" style="background:linear-gradient(135deg,#7d3c98,#9b59b6);" onclick="doChangePassword()">&#128274; Password Change Karein</button>
+      <div class="modal-msg" id="profile-msg"></div>
     </div>
   </div>
 </div>
 
-<!-- HEADER -->
-<header>
-  <div class="header-inner">
-    <a href="#" class="logo">
-      <div class="logo-icon">🇮🇳</div>
-      <div>
-        <span class="logo-text">All Work Online</span>
-        <span class="logo-sub">Digital India Services — Lucknow, UP</span>
+<!-- ========== CARD FORM PAGE ========== -->
+<div id="main-page" style="display:none;">
+<div class="back-to-dash"><button onclick="backToDashboard()">&#8592; Dashboard Par Wapas Jao</button></div>
+<div style="max-width:900px;margin:0 auto 14px;"><button onclick="backToDashboard()" style="background:rgba(255,255,255,0.15);border:1.5px solid rgba(255,255,255,0.4);color:#fff;padding:8px 20px;border-radius:50px;font-family:Oswald,sans-serif;font-size:0.85rem;letter-spacing:2px;cursor:pointer;text-transform:uppercase;">&#8592; Dashboard Par Wapas Jao</button></div>
+
+<div class="container">
+  <div class="company-header">
+    <div class="company-name">
+      <div class="alw-logo-header">AWO</div>
+      <div class="company-name-text">All Work <span>Online</span></div>
+    </div>
+  </div>
+  <h1 class="page-title">🌾 AgriStack Farmer ID Card</h1>
+  <p class="page-subtitle">फार्मर आईडी कार्ड जनरेटर | Farmer ID Card Generator</p>
+
+  <!-- ====== PDF AUTO-FILL SECTION ====== -->
+  <div class="pdf-autofill-section">
+    <div class="pdf-autofill-badge">🤖 AI Powered — New Feature</div>
+    <div class="pdf-autofill-title">📄 Farmer Registry PDF Se Auto Fill Karein</div>
+    <div class="pdf-autofill-subtitle">AgriStack PDF upload karein — AI automatically saari details aur photo fill kar dega!</div>
+    <div class="pdf-drop-zone" id="pdf-drop-zone"
+      ondragover="event.preventDefault(); this.classList.add('drag-over');"
+      ondragleave="this.classList.remove('drag-over');"
+      ondrop="event.preventDefault(); this.classList.remove('drag-over'); handlePdfDrop(event);">
+      <input type="file" id="pdf-upload-input" accept=".pdf" onchange="handlePdfUpload(event)">
+      <span class="pdf-drop-icon">📋</span>
+      <div class="pdf-drop-text">PDF Yahan Drop Karein ya Click Karein</div>
+      <div class="pdf-drop-sub">Farmer Registry Enrollment Data PDF (.pdf) — Auto fill + Photo crop ho jayegi</div>
+    </div>
+    <div class="pdf-success-toast" id="pdf-success-toast">✅ PDF se saari details auto fill ho gayi! Photo bhi crop ho gayi.</div>
+  </div>
+
+  <!-- PDF Loading Overlay -->
+  <div class="pdf-loading-overlay" id="pdf-loading-overlay">
+    <div class="pdf-loading-spinner"></div>
+    <div class="pdf-loading-text">PDF Process Ho Raha Hai...</div>
+    <div class="pdf-loading-step" id="pdf-loading-step">PDF render ho raha hai...</div>
+  </div>
+
+  <!-- FORM -->
+  <div class="form-section">
+    <h2>👤 Personal Details / व्यक्तिगत जानकारी</h2>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Full Name (English)</label>
+        <input type="text" id="name-en" placeholder="e.g. Ramnaresh Chaudhari">
       </div>
-    </a>
-    <nav>
-      <a href="https://pmkisanwork.github.io/Home/">Home</a>
-      <a href="https://pmkisanwork.github.io/About-Us/">About Us</a>
-      <a href="https://pmkisanwork.github.io/Allservicelink/" class="active">Services</a>
-      <a href="https://pmkisanwork.github.io/Status-/">Status</a>
-      <a href="https://pmkisanwork.github.io/LAND-SEEDING/">PM Kisan</a>
-      <a href="https://connect.csc.gov.in/account/authorize?response_type=code&client_id=0f8ca686-5a31-46b8-bb51-d9834ba9fa9d&redirect_uri=https%3A%2F%2Fdigitalseva.csc.gov.in%2Fauth%2Fcallback%2F&state=39404" class="btn-login">CSC Login</a>
-    </nav>
+      <div class="form-group">
+        <label>पूरा नाम (हिंदी)</label>
+        <input type="text" id="name-hi" placeholder="e.g. रामनरेश चौधरी" style="font-family:'Noto Sans Devanagari',sans-serif">
+      </div>
+      <div class="form-group">
+        <label>Date of Birth</label>
+        <input type="date" id="dob">
+      </div>
+      <div class="form-group">
+        <label>Gender / लिंग</label>
+        <select id="gender">
+          <option value="Male">Male / पुरुष</option>
+          <option value="Female">Female / महिला</option>
+          <option value="Other">Other / अन्य</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Caste Category / जाति वर्ग</label>
+        <select id="caste">
+          <option value="General">General / सामान्य</option>
+          <option value="OBC">OBC</option>
+          <option value="SC">SC</option>
+          <option value="ST">ST</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Mobile No. / मोबाइल नं.</label>
+        <input type="tel" id="mobile" placeholder="10-digit number" maxlength="10">
+      </div>
+      <div class="form-group">
+        <label>Aadhar No. / आधार नं.</label>
+        <input type="text" id="aadhar" placeholder="XXXX XXXX XXXX" maxlength="14">
+      </div>
+      <div class="form-group">
+        <label>Farmer ID / फार्मर आईडी</label>
+        <input type="text" id="farmer-id" placeholder="e.g. 36565207294">
+      </div>
+      <div class="form-group">
+        <label>Enrollment ID</label>
+        <input type="text" id="enrollment-id" placeholder="e.g. 10_217_1284_236194_005001">
+      </div>
+      <div class="form-group">
+        <label>Photo / फोटो</label>
+        <div class="photo-upload-area">
+          <input type="file" id="photo-input" accept="image/*" onchange="previewPhoto(event)">
+          <span class="upload-icon">📷</span>
+          <p>Click to upload photo</p>
+          <img id="photo-preview" alt="Photo Preview">
+        </div>
+      </div>
+    </div>
   </div>
-</header>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-badge">🏛️ Govt. Services Portal — CSC Authorized</div>
-  <h1>Sabhi Sarkari Seva<br/><span>Ek Hi Jagah Par</span></h1>
-  <p>Aadhaar, PAN, PM Kisan, Pension, Certificate – sab kuch aasani se, ghar baithe. Fast. Reliable. Affordable.</p>
-  <div class="tricolor-bar"><div></div><div></div><div></div></div>
-
-  <!-- SEARCH -->
-  <div class="search-wrap">
-    <input type="text" class="search-box" id="searchInput" placeholder="🔍  Service dhundhen... (jaise: Aadhaar, PAN, Pension)" oninput="filterServices(this.value)" autocomplete="off" />
-    <span class="search-icon">🔍</span>
+  <div class="form-section">
+    <h2>🏠 Address / पता</h2>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Ward / Village Name</label>
+        <input type="text" id="village" placeholder="e.g. Jadu Paran, Ward No. 14">
+      </div>
+      <div class="form-group">
+        <label>Sub District / तहसील</label>
+        <input type="text" id="sub-district" placeholder="e.g. Kalyanpur">
+      </div>
+      <div class="form-group">
+        <label>District / जिला</label>
+        <input type="text" id="district" placeholder="e.g. Samastipur">
+      </div>
+      <div class="form-group">
+        <label>State / राज्य</label>
+        <select id="state"><option value="">-- State Chunein --</option><optgroup label="States"><option value="Andhra Pradesh">Andhra Pradesh</option><option value="Arunachal Pradesh">Arunachal Pradesh</option><option value="Assam">Assam</option><option value="Bihar">Bihar</option><option value="Chhattisgarh">Chhattisgarh</option><option value="Goa">Goa</option><option value="Gujarat">Gujarat</option><option value="Haryana">Haryana</option><option value="Himachal Pradesh">Himachal Pradesh</option><option value="Jharkhand">Jharkhand</option><option value="Karnataka">Karnataka</option><option value="Kerala">Kerala</option><option value="Madhya Pradesh">Madhya Pradesh</option><option value="Maharashtra">Maharashtra</option><option value="Manipur">Manipur</option><option value="Meghalaya">Meghalaya</option><option value="Mizoram">Mizoram</option><option value="Nagaland">Nagaland</option><option value="Odisha">Odisha</option><option value="Punjab">Punjab</option><option value="Rajasthan">Rajasthan</option><option value="Sikkim">Sikkim</option><option value="Tamil Nadu">Tamil Nadu</option><option value="Telangana">Telangana</option><option value="Tripura">Tripura</option><option value="Uttar Pradesh">Uttar Pradesh</option><option value="Uttarakhand">Uttarakhand</option><option value="West Bengal">West Bengal</option></optgroup><optgroup label="Union Territories"><option value="Andaman and Nicobar Islands">Andaman &amp; Nicobar Islands</option><option value="Chandigarh">Chandigarh</option><option value="Dadra and Nagar Haveli and Daman and Diu">Dadra &amp; Nagar Haveli, Daman &amp; Diu</option><option value="Delhi">Delhi</option><option value="Jammu and Kashmir">Jammu &amp; Kashmir</option><option value="Ladakh">Ladakh</option><option value="Lakshadweep">Lakshadweep</option><option value="Puducherry">Puducherry</option></optgroup></select>
+      </div>
+      <div class="form-group">
+        <label>PIN Code</label>
+        <input type="text" id="pin" placeholder="e.g. 848302" maxlength="6">
+      </div>
+    </div>
   </div>
-  <p class="search-hint">20+ services available — type karke turant dhundhen</p>
-</section>
 
-<!-- STATS -->
-<div class="stats-bar">
-  <div class="stats-inner">
-    <div class="stat-item"><h3>20+</h3><p>Sarkari Sevaen</p></div>
-    <div class="stat-item"><h3>₹30</h3><p>Se Shuru</p></div>
-    <div class="stat-item"><h3>5000+</h3><p>Happy Customers</p></div>
-    <div class="stat-item"><h3>CSC</h3><p>Authorized Center</p></div>
-    <div class="stat-item"><h3>UP</h3><p>Uttar Pradesh</p></div>
+  <div class="form-section">
+    <h2>🌾 Land Ownership Details / भूमि विवरण</h2>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>S.No.</label>
+        <input type="text" id="land-sno" placeholder="e.g. 215">
+      </div>
+      <div class="form-group">
+        <label>Owner Name (Hindi)</label>
+        <input type="text" id="land-owner-hi" placeholder="e.g. राम नरेश चौधरी" style="font-family:'Noto Sans Devanagari',sans-serif">
+      </div>
+      <div class="form-group">
+        <label>Identifier Name & Type</label>
+        <input type="text" id="land-id-type" placeholder="e.g. पिताजी का नाम">
+      </div>
+      <div class="form-group">
+        <label>Owner Type</label>
+        <select id="land-owner-type">
+          <option value="Joint">Joint / संयुक्त</option>
+          <option value="Single">Single / एकल</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Owner Share/Type</label>
+        <input type="text" id="land-share" placeholder="e.g. Equal Share">
+      </div>
+      <div class="form-group">
+        <label>Khasra Total Area</label>
+        <input type="text" id="land-area" placeholder="e.g. 1.33333336">
+      </div>
+      <div class="form-group">
+        <label>Survey Assigned Area</label>
+        <input type="text" id="land-survey" placeholder="e.g. 0.000001">
+      </div>
+    </div>
+  </div>
+
+  <button class="generate-btn" onclick="doGenerate()">✅ Generate Farmer ID Card</button>
+
+  <!-- CARD PREVIEW -->
+  <div id="card-preview-section">
+    <p class="card-preview-title">📋 PVC Card Preview (85.6 × 54 mm)</p>
+    <p class="size-note">Standard Credit Card / PVC Size — Front & Back</p>
+
+    <div class="cards-wrapper">
+
+      <!-- ===== FRONT ===== -->
+      <div class="pvc-card" id="card-front">
+        <!-- decorative overlays via ::before / ::after -->
+
+        <!-- HEADER -->
+        <div class="front-header">
+          <div class="front-logo-area">
+            <div class="logo-emblem">🌿</div>
+            <div class="brand-text">
+              <div class="brand-name">Agri<span>Stack</span></div>
+              <div class="brand-sub">Farmer Registry</div>
+            </div>
+          </div>
+          <div class="front-title-block">
+            <div class="card-type-hi">फार्मर आईडी कार्ड</div>
+            <div class="card-type-en">FARMER IDENTITY CARD</div>
+          </div>
+        </div>
+
+        <!-- GOV STRIP -->
+        <div class="gov-strip">
+          <span class="gov-strip-text">Ministry of Agriculture & Farmers Welfare, Govt. of India</span>
+          <span class="gov-strip-right">AgriStack</span>
+        </div>
+
+        <!-- BODY -->
+        <div class="front-body">
+          <div class="photo-col">
+            <img id="card-photo-img" class="front-photo" alt="Farmer Photo">
+            <div id="card-photo-placeholder" class="front-photo-placeholder">👨‍🌾</div>
+          </div>
+
+          <div class="info-col">
+            <div class="farmer-name-en" id="card-name-en">—</div>
+            <div class="farmer-name-hi" id="card-name-hi">—</div>
+            <div class="f-row"><span class="f-label">DOB :</span><span class="f-val" id="card-dob">—</span></div>
+            <div class="f-row"><span class="f-label">Gender :</span><span class="f-val" id="card-gender">—</span></div>
+            <div class="f-row"><span class="f-label">Age :</span><span class="f-val" id="card-age">—</span></div>
+            <div class="f-row"><span class="f-label">Caste :</span><span class="f-val" id="card-caste">—</span></div>
+            <div class="f-row"><span class="f-label">Mobile :</span><span class="f-val" id="card-mobile">—</span></div>
+            <div class="f-row"><span class="f-label">Aadhar :</span><span class="f-val" id="card-aadhar">—</span></div>
+          </div>
+
+          <div class="qr-col">
+            <div class="front-qr" id="card-qr"></div>
+            <div class="qr-label">Scan for<br>verification</div>
+          </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="front-footer">
+          <div>
+            <div class="footer-label">Farmer ID</div>
+            <div class="footer-id" id="card-farmer-id">—</div>
+          </div>
+          <div class="alw-logo-seal">
+            <div class="alw-text">AWO</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== BACK ===== -->
+      <div class="pvc-card" id="card-back">
+
+        <!-- BACK HEADER -->
+        <div class="back-header">
+          <div class="back-header-left">
+            <div class="back-header-label">Farmer Enrollment ID</div>
+            <div class="enrollment-id-val" id="card-enrollment-id">—</div>
+          </div>
+          <div class="back-header-right">
+            <div class="back-brand">Agri<span>Stack</span></div>
+            <div class="back-brand-sub">Govt. of India Initiative</div>
+          </div>
+        </div>
+
+        <!-- BACK BODY -->
+        <div class="back-body">
+          <div class="addr-block">
+            <div class="addr-title">📍 Address / पता</div>
+            <div class="addr-val" id="card-address">—</div>
+          </div>
+
+          <div class="land-title">🌾 Land Ownership Details / भूमि विवरण</div>
+          <table class="land-tbl">
+            <thead>
+              <tr>
+                <th>State</th>
+                <th>District</th>
+                <th>Sub Dist.</th>
+                <th>Village</th>
+                <th>S.No.</th>
+                <th>Owner</th>
+                <th>ID Type</th>
+                <th>Own.Type</th>
+                <th>Share</th>
+                <th>Area</th>
+                <th>Survey</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td id="t-state">—</td>
+                <td id="t-district">—</td>
+                <td id="t-subdistrict">—</td>
+                <td id="t-village">—</td>
+                <td id="t-sno">—</td>
+                <td id="t-owner-hi">—</td>
+                <td id="t-idtype">—</td>
+                <td id="t-ownertype">—</td>
+                <td id="t-share">—</td>
+                <td id="t-area">—</td>
+                <td id="t-survey">—</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="annexure-block">
+            <strong>Consent / सहमति</strong>
+            I give my consent to State & Central Governments to use my information for PM-KISAN, DBT Schemes, PMKSY, PMFBY, Credit Solutions etc. This card is issued under AgriStack initiative.
+          </div>
+        </div>
+
+        <!-- BACK FOOTER -->
+        <div class="back-footer">
+          <div class="back-footer-text">This card is for personal use only and is not a government-issued identity document.</div>
+        </div>
+      </div>
+
+    </div><!-- /cards-wrapper -->
+
+    <button class="download-btn" onclick="downloadCard()">⬇️ Download Card (PDF)</button>
   </div>
 </div>
-
-<!-- FILTERS -->
-<div class="filters">
-  <button class="filter-btn active" onclick="filterCategory('all',this)">🌐 Sabhi Sevaen</button>
-  <button class="filter-btn" onclick="filterCategory('kisan',this)">🌾 Kisan</button>
-  <button class="filter-btn" onclick="filterCategory('identity',this)">🪪 Identity</button>
-  <button class="filter-btn" onclick="filterCategory('certificate',this)">📜 Certificate</button>
-  <button class="filter-btn" onclick="filterCategory('health',this)">🏥 Health</button>
-  <button class="filter-btn" onclick="filterCategory('pension',this)">💼 Pension</button>
 </div>
 
-<!-- SERVICES -->
-<div class="services-section">
-  <div id="noResults" class="no-results">
-    <div class="icon">🔍</div>
-    <p>Koi service nahi mili — doosra keyword try karein</p>
-  </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-  <!-- KISAN -->
-  <div class="category-section" data-cat="kisan">
-    <div class="category-title theme-green">
-      <div class="dot"></div>🌾 Kisan Seva
-      <span class="category-count">4 services</span>
-      <div class="line"></div>
-    </div>
-    <div class="grid theme-green">
-      <div class="card" data-name="pm kisan land seeding" data-cat="kisan">
-        <div class="card-top"><div class="card-icon">🌱</div><span class="badge-popular">⭐ Popular</span></div>
-        <div class="card-name">PM Kisan Land Seeding</div>
-        <div class="card-desc">Zameen ki seeding PM KISAN portal par — jaldi karwayein!</div>
-        <div class="card-bottom">
-          <span class="card-price">₹299</span>
-          <a href="https://allworkonline.github.io/landseeding/" target="_blank" class="card-btn">Apply ↗</a>
-        </div>
-      </div>
-      <div class="card" data-name="pm kisan new registration" data-cat="kisan">
-        <div class="card-top"><div class="card-icon">📋</div></div>
-        <div class="card-name">PM Kisan New Registration</div>
-        <div class="card-desc">Naye kisan ka PM KISAN yojana mein registration</div>
-        <div class="card-bottom">
-          <span class="card-price">₹100</span>
-          <a href="https://pmkisan.gov.in/RegistrationFormupdated.aspx" target="_blank" class="card-btn">Apply ↗</a>
-        </div>
-      </div>
-      <div class="card" data-name="pm kisan ekyc aadhaar" data-cat="kisan">
-        <div class="card-top"><div class="card-icon">🔐</div><span class="badge-popular">⭐ Popular</span></div>
-        <div class="card-name">PM Kisan eKYC</div>
-        <div class="card-desc">eKYC mandatory hai — OTP ya Biometric se karwayein</div>
-        <div class="card-bottom">
-          <span class="card-price">₹100</span>
-          <a href="https://pmkisan.gov.in/aadharekyc.aspx" target="_blank" class="card-btn">Apply ↗</a>
-        </div>
-      </div>
-      <div class="card" data-name="farmer registry up" data-cat="kisan">
-        <div class="card-top"><div class="card-icon">🗂️</div></div>
-        <div class="card-name">Farmer Registry (UP)</div>
-        <div class="card-desc">UP Farmer Registry mein naam darj karwayein</div>
-        <div class="card-bottom">
-          <span class="card-price">₹100</span>
-          <a href="https://upfr.agristack.gov.in/farmer-registry-up/#/" target="_blank" class="card-btn">Apply ↗</a>
-        </div>
-      </div>
-    </div>
-  </div>
+<!-- Firebase Compat (no ES module — works everywhere) -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script>
+  // ====== ERROR DISPLAY (screen pe dikhega) ======
+  window.onerror = function(msg, src, line) {
+    var d = document.getElementById('_err_overlay');
+    if (!d) {
+      d = document.createElement('div');
+      d.id = '_err_overlay';
+      d.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:99999;background:#c0392b;color:#fff;padding:14px 16px;font-size:0.85rem;font-family:monospace;word-break:break-all;';
+      document.body.appendChild(d);
+    }
+    d.innerHTML += '<b>ERROR:</b> ' + msg + '<br><small>' + src + ':' + line + '</small><br>';
+  };
 
-  <!-- IDENTITY -->
-  <div class="category-section" data-cat="identity">
-    <div class="category-title theme-saffron">
-      <div class="dot"></div>🪪 Pehchaan Dastavej
-      <span class="category-count">6 services</span>
-      <div class="line"></div>
-    </div>
-    <div class="grid theme-saffron">
-      <div class="card" data-name="aadhaar card download" data-cat="identity">
-        <div class="card-top"><div class="card-icon">📥</div><span class="badge-popular">⭐ Popular</span></div>
-        <div class="card-name">Aadhaar Card Download</div>
-        <div class="card-desc">Official UIDAI portal se Aadhaar PDF download</div>
-        <div class="card-bottom">
-          <span class="card-price">₹50</span>
-          <a href="https://myaadhaar.uidai.gov.in/genricDownloadAadhaar/en" target="_blank" class="card-btn">Apply ↗</a>
-        </div>
-      </div>
-      <div class="card" data-name="aadhaar pvc card order" data-cat="identity">
-        <div class="card-top"><div class="card-icon">💳</div></div>
-        <div class="card-name">Aadhaar PVC Card Order</div>
-        <div class="card-desc">Plastic PVC Aadhaar card ghar par mangwayein</div>
-        <div class="card-bottom">
-          <span class="card-price">₹50</span>
-          <a href="https://myaadhaar.uidai.gov.in/genricPVC/en" target="_blank" class="card-btn">Apply ↗</a>
-        </div>
-      </div>
-      <div class="card" data-name="pan card apply nsdl" data-cat="identity">
-        <div class="card-top"><div class="card-icon">🟠</div></div>
-        <div class="card-name">PAN Card Apply</div>
-        <div class="card-desc">Naya PAN card apply karein NSDL portal se</div>
-        <div class="card-bottom">
-          <span class="card-price">₹108</span>
-          <a href="https://www.onlineservices.nsdl.com/paam/endUserRegisterContact.html" target="_blank" class="card-btn">Apply ↗</a>
-        </div>
-      </div>
-      <div class="card" data-name="pan card status check" data-cat="identity">
-        <div class="card-top"><div class="card-icon">🔍</div><span class="badge-free">FREE</span></div>
-        <div class="card-name">PAN Card Status Check</div>
-        <div class="card-desc">PAN application ka current status check karein</div>
-        <div class="card-bottom">
-          <span class="card-price" style="color:var(--green-light)">Free</span>
-          <a href="https://tin.tin.nsdl.com/pantan/StatusTrack.html" target="_blank" class="card-btn">Check ↗</a>
-        </div>
-      </div>
-      <div class="card" data-name="voter id card election" data-cat="identity">
-        <div class="card-top"><div class="card-icon">🗳️</div></div>
-        <div class="card-name">Voter ID Card</div>
-        <div class="card-desc">Voter ID apply ya update karein ECI portal se</div>
-        <div class="card-bottom">
-          <span class="card-price">₹100</span>
-          <a href="https://voters.eci.gov.in/" target="_blank" class="card-btn">Apply ↗</a>
-        </div>
-      </div>
-      <div class="card" data-name="passport apply india" data-cat="identity">
-        <div class="card-top"><div class="card-icon">✈️</div></div>
-        <div class="card-name">Passport Apply</div>
-        <div class="card-desc">Fresh passport ya renewal ke liye apply karein</div>
-        <div class="card-bottom">
-          <span class="card-price">₹1500</span>
-          <a href="https://passportindia.gov.in/" target="_blank" class="card-btn">Apply ↗</a>
-        </div>
-      </div>
-    </div>
-  </div>
+  // ====== FIREBASE INIT ======
+  try {
+    var _firebaseConfig = {
+      apiKey: "AIzaSyBexpZGTfu4tNg72CG__EWyRbyoOa-UmGU",
+      authDomain: "card-pvc-print.firebaseapp.com",
+      projectId: "card-pvc-print",
+      storageBucket: "card-pvc-print.firebasestorage.app",
+      messagingSenderId: "957829374901",
+      appId: "1:957829374901:web:e9c424b55125a492e0effc"
+    };
 
-  <!-- CERTIFICATES -->
-  <div class="category-section" data-cat="certificate">
-    <div class="category-title theme-blue">
-      <div class="dot"></div>📜 Praman Patra (UP)
-      <span class="category-count">3 services</span>
-      <div class="line"></div>
-    </div>
-    <div class="grid theme-blue">
-      <div class="card" data-name="income certificate aay praman patra" data-cat="certificate">
-        <div class="card-top"><div class="card-icon">💰</div></div>
-        <div class="card-name">Income Certificate</div>
-        <div class="card-desc">Aay Praman Patra — UP eDistrict portal se</div>
-        <div class="card-bottom">
-          <span class="card-price">₹30</span>
-          <a href="https://allworkonline.github.io/edistrict.up.gov.in" target="_blank" class="card-btn">Apply ↗</a>
-        </div>
-      </div>
-      <div class="card" data-name="domicile certificate niwas praman patra" data-cat="certificate">
-        <div class="card-top"><div class="card-icon">🏠</div></div>
-        <div class="card-name">Domicile Certificate</div>
-        <div class="card-desc">Niwas Praman Patra — UP eDistrict portal se</div>
-        <div class="card-bottom">
-          <span class="card-price">₹30</span>
-          <a href="https://allworkonline.github.io/edistrict.up.gov.in" target="_blank" class="card-btn">Apply ↗</a>
-        </div>
-      </div>
-      <div class="card" data-name="caste certificate jati praman patra" data-cat="certificate">
-        <div class="card-top"><div class="card-icon">📄</div></div>
-        <div class="card-name">Caste Certificate</div>
-        <div class="card-desc">Jati Praman Patra — SC/ST/OBC ke liye</div>
-        <div class="card-bottom">
-          <span class="card-price">₹100</span>
-          <a href="https://allworkonline.github.io/edistrict.up.gov.in" target="_blank" class="card-btn">Apply ↗</a>
-        </div>
-      </div>
-    </div>
-  </div>
+    if (!firebase.apps.length) firebase.initializeApp(_firebaseConfig);
+    var _db = firebase.firestore();
+    window._db = _db;
 
-  <!-- HEALTH -->
-  <div class="category-section" data-cat="health">
-    <div class="category-title theme-purple">
-      <div class="dot"></div>🏥 Swasthya Seva
-      <span class="category-count">4 services</span>
-      <div class="line"></div>
-    </div>
-    <div class="grid theme-purple">
-      <div class="card" data-name="ayushman card health insurance" data-cat="health">
-        <div class="card-top"><div class="card-icon">🛡️</div><span class="badge-popular">⭐ Popular</span></div>
-        <div class="card-name">Ayushman Card</div>
-        <div class="card-desc">5 lakh tak ka free health insurance — abhi banwayein</div>
-        <div class="card-bottom">
-          <span class="card-price">₹100</span>
-          <a href="https://beneficiary.nha.gov.in/" target="_blank" class="card-btn">Apply ↗</a>
-        </div>
-      </div>
-      <div class="card" data-name="abha health card" data-cat="health">
-        <div class="card-top"><div class="card-icon">🩺</div></div>
-        <div class="card-name">Health Card (ABHA)</div>
-        <div class="card-desc">Ayushman Bharat Health Account — digital health record</div>
-        <div class="card-bottom">
-          <span class="card-price">₹100</span>
-          <a href="https://abha.abdm.gov.in/abha/v3/" target="_blank" class="card-btn">Apply ↗</a>
-        </div>
-      </div>
-      <div class="card" data-name="eshram card labour worker" data-cat="health">
-        <div class="card-top"><div class="card-icon">👷</div></div>
-        <div class="card-name">eShram Card</div>
-        <div class="card-desc">Asangathit mazdooron ke liye — free registration</div>
-        <div class="card-bottom">
-          <span class="card-price">₹100</span>
-          <a href="https://eshram.gov.in/" target="_blank" class="card-btn">Apply ↗</a>
-        </div>
-      </div>
-      <div class="card" data-name="job card mgnrega nrega" data-cat="health">
-        <div class="card-top"><div class="card-icon">🔨</div></div>
-        <div class="card-name">Job Card (MGNREGA)</div>
-        <div class="card-desc">100 din ke rozgar ka adhikar — NREGA job card</div>
-        <div class="card-bottom">
-          <span class="card-price">₹100</span>
-          <a href="https://nregastrep.nic.in/netnrega/homestciti.aspx?state_code=31&state_name=UTTAR%20PRADESH&lflag=eng&labels=labels" target="_blank" class="card-btn">Apply ↗</a>
-        </div>
-      </div>
-    </div>
-  </div>
+    // ====== FIREBASE HELPERS ======
+    window._fbGetUserData = async function(username) {
+      try {
+        var snap = await _db.collection('users').doc(username).get();
+        return snap.exists ? snap.data() : null;
+      } catch(e) { console.error(e); return null; }
+    };
 
-  <!-- PENSION -->
-  <div class="category-section" data-cat="pension">
-    <div class="category-title theme-gold">
-      <div class="dot"></div>💼 Pension Yojna
-      <span class="category-count">3 services</span>
-      <div class="line"></div>
-    </div>
-    <div class="grid theme-gold">
-      <div class="card" data-name="old age pension vridha pension" data-cat="pension">
-        <div class="card-top"><div class="card-icon">👵</div><span class="badge-popular">⭐ Popular</span></div>
-        <div class="card-name">Old Age Pension</div>
-        <div class="card-desc">Vridha Pension — UP SSPY portal se apply karein</div>
-        <div class="card-bottom">
-          <span class="card-price">₹100</span>
-          <a href="https://sspy-up.gov.in/oap/public_new/UserRegistrationForm.aspx?Scheme=OldAgePension" target="_blank" class="card-btn">Apply ↗</a>
-        </div>
-      </div>
-      <div class="card" data-name="widow woman pension vidhwa" data-cat="pension">
-        <div class="card-top"><div class="card-icon">🙍‍♀️</div></div>
-        <div class="card-name">Destitute Woman Pension</div>
-        <div class="card-desc">Vidhwa/Destitute mahila pension — UP sspy portal</div>
-        <div class="card-bottom">
-          <span class="card-price">₹100</span>
-          <a href="https://sspy-up.gov.in/oap/public_new/UserRegistrationForm.aspx?Scheme=WidowPension" target="_blank" class="card-btn">Apply ↗</a>
-        </div>
-      </div>
-      <div class="card" data-name="visa card" data-cat="pension">
-        <div class="card-top"><div class="card-icon">💳</div></div>
-        <div class="card-name">Visa Card</div>
-        <div class="card-desc">Visa card apply karne ke liye yahan click karein</div>
-        <div class="card-bottom">
-          <span class="card-price">₹100</span>
-          <a href="https://www.visa.co.in/" target="_blank" class="card-btn">Apply ↗</a>
-        </div>
-      </div>
-    </div>
-  </div>
+    window._fbSaveUser = async function(username, data) {
+      try {
+        await _db.collection('users').doc(username).set(data);
+        return true;
+      } catch(e) { console.error(e); return false; }
+    };
 
-</div>
+    window._fbCheckEmailExists = async function(email) {
+      try {
+        var snap = await _db.collection('users').where('email','==',email).get();
+        return !snap.empty;
+      } catch(e) { return false; }
+    };
 
-<!-- FOOTER -->
-<footer>
-  <p>© 2026 <strong style="color:white">All Work Online</strong> — Rakesh Sharma | Lucknow, Uttar Pradesh</p>
-  <p style="margin-top:6px;">
-    <a href="tel:8461246946">📱 8461246946</a> &nbsp;|&nbsp;
-    <a href="mailto:pmkisanwork@gmail.com">📧 pmkisanwork@gmail.com</a>
-  </p>
-  <p style="margin-top:8px;font-size:0.72rem;opacity:0.6;">Designed by <a href="#">S.S.G Web Developer And Technology</a></p>
-</footer>
+    window._fbFindUserByUsernameOrEmail = async function(input) {
+      try {
+        var snap = await _db.collection('users').doc(input).get();
+        if (snap.exists) return { key: input, data: snap.data() };
+        var qsnap = await _db.collection('users').where('email','==',input).get();
+        if (!qsnap.empty) { var d=qsnap.docs[0]; return { key:d.id, data:d.data() }; }
+        return null;
+      } catch(e) { return null; }
+    };
 
-<!-- WHATSAPP -->
-<a href="https://wa.me/918461246946?text=Namaste%20Rakesh%20ji%2C%20mujhe%20service%20ke%20baare%20mein%20jaankari%20chahiye" class="wa-float" target="_blank">
-  <div class="wa-tooltip">WhatsApp par sampark karein</div>
-  <div class="wa-btn">💬</div>
-</a>
+    window._fbGetCardHistory = async function(username) {
+      try {
+        var snap = await _db.collection('cards').where('username','==',username).get();
+        var docs = snap.docs.map(function(d){ return Object.assign({_id:d.id}, d.data()); });
+        docs.sort(function(a,b){ return new Date(a.timestamp)-new Date(b.timestamp); });
+        return docs;
+      } catch(e) { console.error('History load error:',e); return []; }
+    };
 
-<!-- BACK TO TOP -->
-<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+    window._fbUpdatePassword = async function(username, newPassword) {
+      try {
+        var snap = await _db.collection('users').doc(username).get();
+        if (!snap.exists) return false;
+        var data = snap.data();
+        data.password = newPassword;
+        await _db.collection('users').doc(username).set(data);
+        return true;
+      } catch(e) { console.error(e); return false; }
+    };
+
+    window._fbSaveCard = async function(username, card) {
+      try {
+        var ref = await _db.collection('cards').add(Object.assign({username:username}, card));
+        return ref.id;
+      } catch(e) { console.error(e); return null; }
+    };
+
+    window._fbDeleteCard = async function(cardId) {
+      try {
+        await _db.collection('cards').doc(cardId).delete();
+        return true;
+      } catch(e) { console.error(e); return false; }
+    };
+
+    window._fbUpdateCard = async function(cardId, username, data) {
+      try {
+        await _db.collection('cards').doc(cardId).set(Object.assign({username:username}, data));
+        return true;
+      } catch(e) { console.error(e); return false; }
+    };
+
+  } catch(e) {
+    console.error('Firebase init failed:', e);
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('auth-page').style.display = 'flex';
+    });
+  }
+
+  // ====== AUTO LOGIN CHECK ======
+  document.addEventListener('DOMContentLoaded', function() {
+    // Safety fallback — agar 3 sec mein kuch na dikhe toh auth page show karo
+    var shown = false;
+    var fallback = setTimeout(function() {
+      if (!shown) {
+        console.warn('Fallback: showing auth page');
+        document.getElementById('auth-page').style.display = 'flex';
+      }
+    }, 3000);
+
+    var current = localStorage.getItem('awo_current') || null;
+    if (current) {
+      window._fbGetUserData(current).then(function(userData) {
+        shown = true;
+        clearTimeout(fallback);
+        if (userData) {
+          window._currentUserData = userData;
+          showDashboard();
+        } else {
+          localStorage.removeItem('awo_current');
+          document.getElementById('auth-page').style.display = 'flex';
+        }
+      }).catch(function(e) {
+        shown = true;
+        clearTimeout(fallback);
+        console.error(e);
+        document.getElementById('auth-page').style.display = 'flex';
+      });
+    } else {
+      shown = true;
+      clearTimeout(fallback);
+      document.getElementById('auth-page').style.display = 'flex';
+    }
+  });
+</script>
 
 <script>
-// ── SEARCH ──
-function filterServices(q) {
-  q = q.toLowerCase().trim();
-  const cards = document.querySelectorAll('.card');
-  const sections = document.querySelectorAll('.category-section');
-  let anyVisible = false;
+// ====== CURRENT USER (localStorage sirf session ke liye) ======
+function getCurrentUser()   { return localStorage.getItem('awo_current') || null; }
+function setCurrentUser(u)  { localStorage.setItem('awo_current', u); }
+function clearCurrentUser() { localStorage.removeItem('awo_current'); }
 
-  if (!q) {
-    cards.forEach(c => c.style.display = '');
-    sections.forEach(s => s.style.display = '');
-    document.getElementById('noResults').style.display = 'none';
+// ====== TAB SWITCH ======
+function switchTab(tab) {
+  // Hide all forms
+  document.getElementById('form-login').style.display   = 'none';
+  document.getElementById('form-signup').style.display  = 'none';
+  document.getElementById('form-forgot').style.display  = 'none';
+  document.getElementById('auth-tabs-bar').style.display = (tab==='forgot') ? 'none' : 'flex';
+  document.getElementById('forgot-title').style.display  = (tab==='forgot') ? 'block' : 'none';
+  // Show selected
+  if (tab==='login')  document.getElementById('form-login').style.display  = 'block';
+  if (tab==='signup') document.getElementById('form-signup').style.display = 'block';
+  if (tab==='forgot') document.getElementById('form-forgot').style.display = 'block';
+  // Tab active state
+  if (document.getElementById('tab-login'))  document.getElementById('tab-login').classList.toggle('active',  tab==='login');
+  if (document.getElementById('tab-signup')) document.getElementById('tab-signup').classList.toggle('active', tab==='signup');
+  // Clear messages
+  ['login-msg','signup-msg','forgot-msg'].forEach(function(id){
+    var el=document.getElementById(id); if(el){el.className='auth-msg';el.textContent='';}
+  });
+}
+
+// ====== SIGNUP ======
+async function doSignup() {
+  var name   = document.getElementById('su-name').value.trim();
+  var email  = document.getElementById('su-email').value.trim();
+  var mobile = document.getElementById('su-mobile').value.trim();
+  var user   = document.getElementById('su-user').value.trim();
+  var pass   = document.getElementById('su-pass').value;
+  var pass2  = document.getElementById('su-pass2').value;
+  var msg    = document.getElementById('signup-msg');
+  msg.className = 'auth-msg'; msg.textContent = '';
+
+  if (!name||!email||!mobile||!user||!pass||!pass2) {
+    msg.textContent='❌ Sabhi fields bharna zaroori hai!'; msg.className='auth-msg error'; return;
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    msg.textContent='❌ Sahi email address dalein!'; msg.className='auth-msg error'; return;
+  }
+  if (!/^[0-9]{10}$/.test(mobile)) {
+    msg.textContent='❌ Mobile 10 digit ka hona chahiye!'; msg.className='auth-msg error'; return;
+  }
+  if (pass!==pass2) {
+    msg.textContent='❌ Dono password match nahi kar rahe!'; msg.className='auth-msg error'; return;
+  }
+  if (pass.length<6) {
+    msg.textContent='❌ Password kam se kam 6 characters ka hona chahiye!'; msg.className='auth-msg error'; return;
+  }
+
+  msg.textContent='⏳ Account ban raha hai...'; msg.className='auth-msg success';
+
+  // Check username exists
+  var existing = await window._fbGetUserData(user);
+  if (existing) {
+    msg.textContent='❌ Yeh username pehle se le liya gaya hai!'; msg.className='auth-msg error'; return;
+  }
+  // Check email exists
+  var emailExists = await window._fbCheckEmailExists(email);
+  if (emailExists) {
+    msg.textContent='❌ Yeh email pehle se registered hai!'; msg.className='auth-msg error'; return;
+  }
+
+  var saved = await window._fbSaveUser(user, {name:name, email:email, mobile:mobile, username:user, password:pass, createdAt:new Date().toISOString()});
+  if (!saved) {
+    msg.textContent='❌ Server error! Dobara try karein.'; msg.className='auth-msg error'; return;
+  }
+  msg.textContent='✅ Account ban gaya! Ab login karein.'; msg.className='auth-msg success';
+  setTimeout(function(){
+    document.getElementById('login-user').value=user;
+    switchTab('login');
+  }, 1500);
+}
+
+// ====== LOGIN ======
+async function doLogin() {
+  var user = document.getElementById('login-user').value.trim();
+  var pass = document.getElementById('login-pass').value;
+  var msg  = document.getElementById('login-msg');
+  msg.className='auth-msg'; msg.textContent='';
+
+  if (!user||!pass) {
+    msg.textContent='❌ Username aur Password dono dalein!'; msg.className='auth-msg error'; return;
+  }
+
+  msg.textContent='⏳ Login ho raha hai...'; msg.className='auth-msg success';
+
+  var userData = await window._fbGetUserData(user);
+  if (!userData || userData.password !== pass) {
+    msg.textContent='❌ Galat Username ya Password!'; msg.className='auth-msg error';
+    document.getElementById('login-pass').value=''; return;
+  }
+  window._currentUserData = userData;
+  setCurrentUser(user);
+  showDashboard();
+}
+
+
+// ====== FORGOT PASSWORD — Step 1: Send OTP ======
+var _resetOTP = null;
+var _resetUsername = null;
+
+async function doForgotPassword() {
+  var input = document.getElementById('forgot-input').value.trim();
+  var msg   = document.getElementById('forgot-msg');
+  msg.className='auth-msg'; msg.textContent='';
+
+  if (!input) {
+    msg.textContent='❌ Username ya Email dalein!'; msg.className='auth-msg error'; return;
+  }
+
+  msg.textContent='⏳ Dhundh raha hai...'; msg.className='auth-msg success';
+
+  var result = await window._fbFindUserByUsernameOrEmail(input);
+  if (!result || !result.data || !result.data.email) {
+    msg.textContent='❌ Koi account nahi mila is username/email se!'; msg.className='auth-msg error'; return;
+  }
+
+  var foundUser = result.data;
+  var foundKey  = result.key;
+
+  // Generate 6-digit OTP
+  _resetOTP = Math.floor(100000 + Math.random() * 900000).toString();
+  _resetUsername = foundKey;
+
+  msg.textContent='⏳ OTP email bheja ja raha hai...'; msg.className='auth-msg success';
+
+  // Send OTP via EmailJS
+  emailjs.init('oxyRIaQ-IoizhZPAG');
+  emailjs.send('service_3gdopdh', 'template_ohms6f9', {
+    to_name:    foundUser.name,
+    email:      foundUser.email,
+    to_email:   foundUser.email,
+    username:   foundKey,
+    otp_code:   _resetOTP,
+    password:   'OTP: ' + _resetOTP,
+    message:    'Aapka Password Reset OTP: ' + _resetOTP + ' (10 minute mein use karein)',
+    reset_link: window.location.href
+  }).then(function(){
+    msg.textContent='✅ OTP aapke email par bhej diya gaya! (' + foundUser.email + ')';
+    msg.className='auth-msg success';
+    // Show Step 2
+    document.getElementById('forgot-step1').style.display='none';
+    document.getElementById('forgot-step2').style.display='block';
+  }).catch(function(err){
+    console.error('EmailJS error:', err);
+    _resetOTP = null; _resetUsername = null;
+    msg.textContent='❌ Email bhejne mein problem aai. Dobara try karein.';
+    msg.className='auth-msg error';
+  });
+}
+
+// ====== FORGOT PASSWORD — Step 2: Verify OTP + Set New Password ======
+async function doResetPassword() {
+  var otp    = document.getElementById('forgot-otp').value.trim();
+  var pass1  = document.getElementById('forgot-newpass').value;
+  var pass2  = document.getElementById('forgot-newpass2').value;
+  var msg    = document.getElementById('forgot-msg');
+  msg.className='auth-msg'; msg.textContent='';
+
+  if (!otp || !pass1 || !pass2) {
+    msg.textContent='❌ Sabhi fields bharna zaroori hai!'; msg.className='auth-msg error'; return;
+  }
+  if (otp !== _resetOTP) {
+    msg.textContent='❌ Galat OTP! Dobara check karein.'; msg.className='auth-msg error'; return;
+  }
+  if (pass1 !== pass2) {
+    msg.textContent='❌ Dono password match nahi kar rahe!'; msg.className='auth-msg error'; return;
+  }
+  if (pass1.length < 6) {
+    msg.textContent='❌ Password kam se kam 6 characters ka hona chahiye!'; msg.className='auth-msg error'; return;
+  }
+
+  msg.textContent='⏳ Password update ho raha hai...'; msg.className='auth-msg success';
+
+  // Update password in Firebase
+  var updated = await window._fbUpdatePassword(_resetUsername, pass1);
+  if (!updated) {
+    msg.textContent='❌ Firebase update mein problem aai. Dobara try karein.'; msg.className='auth-msg error'; return;
+  }
+
+  _resetOTP = null; _resetUsername = null;
+  msg.textContent='✅ Password successfully update ho gaya! Ab login karein.'; msg.className='auth-msg success';
+  setTimeout(function(){
+    document.getElementById('forgot-step1').style.display='block';
+    document.getElementById('forgot-step2').style.display='none';
+    document.getElementById('forgot-input').value='';
+    document.getElementById('forgot-otp').value='';
+    document.getElementById('forgot-newpass').value='';
+    document.getElementById('forgot-newpass2').value='';
+    switchTab('login');
+  }, 2500);
+}
+
+function backToStep1() {
+  _resetOTP = null; _resetUsername = null;
+  document.getElementById('forgot-step1').style.display='block';
+  document.getElementById('forgot-step2').style.display='none';
+  document.getElementById('forgot-msg').className='auth-msg';
+  document.getElementById('forgot-msg').textContent='';
+}
+
+// ====== LOGOUT ======
+function doLogout() {
+  clearCurrentUser();
+  document.getElementById('dashboard-page').style.display='none';
+  document.getElementById('main-page').style.display='none';
+  document.getElementById('auth-page').style.display='flex';
+  document.getElementById('login-pass').value='';
+  document.getElementById('login-msg').className='auth-msg';
+}
+
+// ====== SHOW DASHBOARD ======
+function showDashboard() {
+  var username = getCurrentUser();
+  var userData = window._currentUserData || null;
+  document.getElementById('auth-page').style.display='none';
+  document.getElementById('main-page').style.display='none';
+  document.getElementById('dashboard-page').style.display='block';
+  var displayName = userData ? userData.name : username;
+  document.getElementById('dash-username').textContent = displayName;
+  document.getElementById('dash-avatar-text').textContent = displayName.charAt(0).toUpperCase();
+  renderDashboard(username);
+}
+
+async function renderDashboard(username) {
+  var history = await window._fbGetCardHistory(username);
+  window._cachedHistory = history;
+  var today=new Date().toDateString();
+  document.getElementById('stat-total').textContent=history.length;
+  document.getElementById('stat-today').textContent=history.filter(function(c){return new Date(c.timestamp).toDateString()===today;}).length;
+  document.getElementById('stat-male').textContent=history.filter(function(c){return c.gender==='Male';}).length;
+  document.getElementById('stat-female').textContent=history.filter(function(c){return c.gender==='Female';}).length;
+  var tbody=document.getElementById('history-tbody');
+  tbody.innerHTML='';
+  if (history.length===0) {
+    document.getElementById('history-empty').style.display='block';
+    document.getElementById('history-table-wrap').style.display='none';
+  } else {
+    document.getElementById('history-empty').style.display='none';
+    document.getElementById('history-table-wrap').style.display='block';
+    var rev=[].concat(history).reverse();
+    rev.forEach(function(card,i){
+      var origIdx=history.length-1-i;
+      var gBadge=card.gender==='Male'?'badge-m':card.gender==='Female'?'badge-f':'badge-o';
+      var dt=new Date(card.timestamp);
+      var dtStr=dt.toLocaleDateString('en-IN')+' '+dt.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
+      var tr=document.createElement('tr');
+      tr.id='hrow-'+origIdx;
+      tr.innerHTML='<td><strong>'+(i+1)+'</strong></td>'
+        +'<td><strong>'+card.nameEn+'</strong><br><small style="color:#666;font-family:Noto Sans Devanagari,sans-serif">'+card.nameHi+'</small></td>'
+        +'<td>'+card.mobile+'</td>'
+        +'<td>'+(card.district||'—')+'</td>'
+        +'<td>'+(card.state||'—')+'</td>'
+        +'<td><span class="badge '+gBadge+'">'+card.gender+'</span></td>'
+        +'<td><small>'+card.farmerId+'</small></td>'
+        +'<td><small>'+dtStr+'</small></td>'
+        +'<td style="white-space:nowrap;">'
+          +'<button class="dash-btn primary" style="padding:4px 10px;font-size:0.68rem;margin:2px;" onclick="viewCard('+origIdx+')">&#128065; View</button>'
+          +'<button class="dash-btn" style="padding:4px 10px;font-size:0.68rem;margin:2px;background:linear-gradient(135deg,#1a5276,#2980b9);color:#fff;" onclick="editCard('+origIdx+')">&#9998; Edit</button>'
+          +'<button class="dash-btn" style="padding:4px 10px;font-size:0.68rem;margin:2px;background:linear-gradient(135deg,#c8840b,#f0b429);color:#fff;" onclick="quickDownload('+origIdx+')">&#11015; PDF</button>'
+          +'<button class="dash-btn danger" style="padding:4px 10px;font-size:0.68rem;margin:2px;" onclick="deleteCard('+origIdx+')">&#128465; Delete</button>'
+        +'</td>';
+      tbody.appendChild(tr);
+    });
+  }
+}
+
+function showCardForm() {
+  // Form reset
+  window._editingCardId = null;
+  window._editingCardIndex = null;
+  var fields=['name-en','name-hi','mobile','aadhar','farmer-id','enrollment-id',
+    'village','sub-district','district','pin','land-sno','land-owner-hi',
+    'land-id-type','land-share','land-area','land-survey'];
+  fields.forEach(function(f){var el=document.getElementById(f);if(el)el.value='';});
+  document.getElementById('dob').value='';
+  document.getElementById('gender').value='Male';
+  document.getElementById('caste').value='General';
+  document.getElementById('state').value='';
+  document.getElementById('land-owner-type').value='Joint';
+  photoDataUrl=null;
+  document.getElementById('photo-preview').style.display='none';
+  document.getElementById('card-preview-section').style.display='none';
+  var errBox=document.getElementById('gen-error-box');
+  if(errBox) errBox.style.display='none';
+  var btn=document.querySelector('.generate-btn');
+  if(btn) btn.textContent='✅ Generate Farmer ID Card';
+  document.getElementById('dashboard-page').style.display='none';
+  document.getElementById('main-page').style.display='block';
+  window.scrollTo(0,0);
+}
+
+function backToDashboard() {
+  document.getElementById('main-page').style.display='none';
+  document.getElementById('dashboard-page').style.display='block';
+  // renderDashboard mat bulao — cache se hi dikhao
+  // Agar cache empty hai (pehli baar) tab hi Firebase se load karo
+  if (!window._cachedHistory) {
+    var username=getCurrentUser();
+    if (username) renderDashboard(username);
+  } else {
+    updateDashboardStats(window._cachedHistory);
+  }
+  window.scrollTo(0,0);
+}
+
+// ====== PAGE LOAD — handled by Firebase module script above ======
+
+// ====== CARD FUNCTIONS ======
+var photoDataUrl=null;
+
+function previewPhoto(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(ev) {
+      photoDataUrl = ev.target.result;
+      const preview = document.getElementById('photo-preview');
+      preview.src = photoDataUrl;
+      preview.style.display = 'block';
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function calcAge(dob) {
+    if (!dob) return '—';
+    const today = new Date();
+    const birth = new Date(dob);
+    let age = today.getFullYear() - birth.getFullYear();
+    const m = today.getMonth() - birth.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) age--;
+    return age;
+  }
+
+  function formatDate(dob) {
+    if (!dob) return '—';
+    const d = new Date(dob);
+    return d.toLocaleDateString('en-IN', { day: '2-digit', month: '2-digit', year: 'numeric' });
+  }
+
+  function generateCard() {
+    const nameEn = document.getElementById('name-en').value || '—';
+    const nameHi = document.getElementById('name-hi').value || '—';
+    const dob = document.getElementById('dob').value;
+    const gender = document.getElementById('gender').value;
+    const caste = document.getElementById('caste').value;
+    const mobile = document.getElementById('mobile').value || '—';
+    const aadhar = document.getElementById('aadhar').value || '—';
+    const farmerId = document.getElementById('farmer-id').value || '—';
+    const enrollmentId = document.getElementById('enrollment-id').value || '—';
+    const village = document.getElementById('village').value || '';
+    const subDistrict = document.getElementById('sub-district').value || '';
+    const district = document.getElementById('district').value || '';
+    const state = document.getElementById('state').value || '';
+    const pin = document.getElementById('pin').value || '';
+
+    // Front
+    document.getElementById('card-name-en').textContent = nameEn;
+    document.getElementById('card-name-hi').textContent = nameHi;
+    document.getElementById('card-dob').textContent = formatDate(dob);
+    document.getElementById('card-gender').textContent = gender;
+    document.getElementById('card-age').textContent = calcAge(dob);
+    document.getElementById('card-caste').textContent = caste;
+    document.getElementById('card-mobile').textContent = mobile;
+    document.getElementById('card-aadhar').textContent = aadhar;
+    document.getElementById('card-farmer-id').textContent = farmerId;
+
+    // Photo
+    if (photoDataUrl) {
+      const img = document.getElementById('card-photo-img');
+      img.src = photoDataUrl;
+      img.style.display = 'block';
+      document.getElementById('card-photo-placeholder').style.display = 'none';
+    }
+
+    // Address
+    const parts = [village, subDistrict, district, state, pin ? pin : ''].filter(Boolean);
+    document.getElementById('card-address').textContent = parts.join(', ');
+
+    // Enrollment
+    document.getElementById('card-enrollment-id').textContent = enrollmentId;
+
+    // Land table
+    document.getElementById('t-state').textContent = state;
+    document.getElementById('t-district').textContent = district;
+    document.getElementById('t-subdistrict').textContent = subDistrict;
+    document.getElementById('t-village').textContent = village;
+    document.getElementById('t-sno').textContent = document.getElementById('land-sno').value || '—';
+    document.getElementById('t-owner-hi').textContent = document.getElementById('land-owner-hi').value || nameHi;
+    document.getElementById('t-idtype').textContent = document.getElementById('land-id-type').value || '—';
+    document.getElementById('t-ownertype').textContent = document.getElementById('land-owner-type').value;
+    document.getElementById('t-share').textContent = document.getElementById('land-share').value || '—';
+    document.getElementById('t-area').textContent = document.getElementById('land-area').value || '—';
+    document.getElementById('t-survey').textContent = document.getElementById('land-survey').value || '—';
+
+    // QR Code — all details, black, reliable generation
+    const qrDiv = document.getElementById('card-qr');
+    qrDiv.innerHTML = '';
+
+    const address = [village, subDistrict, district, state, pin].filter(Boolean).join(',');
+    const landOwner = document.getElementById('land-owner-hi').value || nameHi;
+    const landArea   = document.getElementById('land-area').value || '';
+    const landSurvey = document.getElementById('land-survey').value || '';
+    const ownerType  = document.getElementById('land-owner-type').value;
+    const share  = document.getElementById('land-share').value || '';
+    const sno    = document.getElementById('land-sno').value || '';
+    const idType = document.getElementById('land-id-type').value || '';
+
+    // Build compact but complete QR data string
+    const qrLines = [
+      'ID:' + farmerId,
+      'ENR:' + enrollmentId,
+      'NM:' + nameEn,
+      'HI:' + nameHi,
+      'DOB:' + formatDate(dob),
+      'GEN:' + gender,
+      'CST:' + caste,
+      'MOB:' + mobile,
+      'ADH:' + aadhar,
+      'ADDR:' + address,
+      'OWN:' + landOwner,
+      'IDT:' + idType,
+      'SNO:' + sno,
+      'OT:' + ownerType,
+      'SHR:' + share,
+      'AREA:' + landArea,
+      'SRV:' + landSurvey
+    ];
+
+    // Try with full data first, fallback to essential data if too long
+    function makeQR(text) {
+      qrDiv.innerHTML = '';
+      return new Promise((resolve) => {
+        try {
+          new QRCode(qrDiv, {
+            text: text,
+            width: 120,
+            height: 120,
+            colorDark: '#000000',
+            colorLight: '#ffffff',
+            correctLevel: QRCode.CorrectLevel.L
+          });
+          resolve(true);
+        } catch(e) {
+          resolve(false);
+        }
+      });
+    }
+
+    const fullText = qrLines.join('|');
+    const essentialText = 'ID:'+farmerId+'|NM:'+nameEn+'|ADH:'+aadhar+'|MOB:'+mobile+'|ADDR:'+address;
+
+    makeQR(fullText).then(ok => {
+      if (!ok || qrDiv.innerHTML === '') {
+        makeQR(essentialText);
+      }
+    });
+
+    const section = document.getElementById('card-preview-section');
+    section.style.display = 'block';
+    section.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  async function downloadCard() {
+    const { jsPDF } = window.jspdf;
+    const cardW = 85.6;
+    const cardH = 54;
+    const margin = 10;
+    const pageW = cardW + margin * 2;
+    const pageH = (cardH * 2) + margin * 3;
+
+    const pdf = new jsPDF({
+      orientation: 'portrait',
+      unit: 'mm',
+      format: [pageW, pageH]
+    });
+
+    const front = document.getElementById('card-front');
+    const back = document.getElementById('card-back');
+
+    // scale:8 = ~300 DPI equivalent — sharp zoom-in quality
+    const frontCanvas = await html2canvas(front, { scale: 8, useCORS: true, backgroundColor: null, logging: false });
+    const backCanvas  = await html2canvas(back,  { scale: 8, useCORS: true, backgroundColor: null, logging: false });
+
+    pdf.addImage(frontCanvas.toDataURL('image/png'), 'PNG', margin, margin,          cardW, cardH);
+    pdf.addImage(backCanvas.toDataURL('image/png'),  'PNG', margin, margin+cardH+margin, cardW, cardH);
+
+    const nameEn = document.getElementById('name-en').value || 'farmer';
+    pdf.save('FarmerID_' + nameEn.replace(/\s+/g, '_') + '.pdf');
+  }
+
+  // Save card to Firebase after generate
+  var _origGen=generateCard;
+  generateCard=function(){_origGen();};
+
+// ======================================================
+//  CLEAN NEW CODE — validation + generate + history
+// ======================================================
+
+function doGenerate() {
+  // --- 1. Validation ---
+  var required = [
+    {id:'name-en',       label:'Full Name (English)'},
+    {id:'name-hi',       label:'पूरा नाम (हिंदी)'},
+    {id:'dob',           label:'Date of Birth'},
+    {id:'mobile',        label:'Mobile No.'},
+    {id:'aadhar',        label:'Aadhar No.'},
+    {id:'farmer-id',     label:'Farmer ID'},
+    {id:'enrollment-id', label:'Enrollment ID'},
+    {id:'village',       label:'Ward / Village'},
+    {id:'sub-district',  label:'Sub District'},
+    {id:'district',      label:'District'},
+    {id:'state',         label:'State'},
+    {id:'pin',           label:'PIN Code'},
+    {id:'land-sno',      label:'S.No.'},
+    {id:'land-owner-hi', label:'Owner Name (Hindi)'},
+    {id:'land-id-type',  label:'Identifier Type'},
+    {id:'land-share',    label:'Owner Share'},
+    {id:'land-area',     label:'Khasra Total Area'},
+    {id:'land-survey',   label:'Survey Area'}
+  ];
+
+  // Reset borders
+  required.forEach(function(f){
+    var el=document.getElementById(f.id);
+    if(el){el.style.border='1.5px solid #b2dfb2'; el.style.boxShadow='';}
+  });
+
+  var missing=[];
+  required.forEach(function(f){
+    var el=document.getElementById(f.id);
+    if(!el||!el.value.trim()){
+      missing.push(f.label);
+      if(el){el.style.border='2px solid #e74c3c'; el.style.boxShadow='0 0 0 3px rgba(231,76,60,0.18)';}
+    }
+  });
+
+  // Show/hide error box
+  var box=document.getElementById('gen-error-box');
+  if(!box){
+    box=document.createElement('div');
+    box.id='gen-error-box';
+    box.style.cssText='background:#fdecea;border:2px solid #e74c3c;border-radius:10px;padding:14px 18px;margin:16px 0;color:#c0392b;font-size:0.88rem;font-weight:600;line-height:1.8;';
+    var btn=document.querySelector('.generate-btn');
+    btn.parentNode.insertBefore(box, btn);
+  }
+  if(missing.length){
+    box.innerHTML='❌ <strong>Yeh fields zaroori hain — pehle bharein:</strong><br>' + missing.map(function(m){return '• '+m;}).join('<br>');
+    box.style.display='block';
+    box.scrollIntoView({behavior:'smooth',block:'center'});
+    return;
+  }
+  box.style.display='none';
+
+  // --- 2. Generate card visuals ---
+  generateCard();
+
+  // --- 3. Edit mode — Firebase update + cache update + dashboard ---
+  var username=getCurrentUser(); if(!username) return;
+
+  if(window._editingCardId) {
+    var idx=window._editingCardIndex;
+    var updatedCard={
+      nameEn:      document.getElementById('name-en').value,
+      nameHi:      document.getElementById('name-hi').value,
+      dob:         document.getElementById('dob').value,
+      gender:      document.getElementById('gender').value,
+      caste:       document.getElementById('caste').value,
+      mobile:      document.getElementById('mobile').value,
+      aadhar:      document.getElementById('aadhar').value,
+      farmerId:    document.getElementById('farmer-id').value,
+      enrollmentId:document.getElementById('enrollment-id').value,
+      village:     document.getElementById('village').value,
+      subDistrict: document.getElementById('sub-district').value,
+      district:    document.getElementById('district').value,
+      state:       document.getElementById('state').value,
+      pin:         document.getElementById('pin').value,
+      landSno:     document.getElementById('land-sno').value,
+      landOwnerHi: document.getElementById('land-owner-hi').value,
+      landIdType:  document.getElementById('land-id-type').value,
+      landOwnerType:document.getElementById('land-owner-type').value,
+      landShare:   document.getElementById('land-share').value,
+      landArea:    document.getElementById('land-area').value,
+      landSurvey:  document.getElementById('land-survey').value,
+      timestamp:   (window._cachedHistory[idx]||{}).timestamp||new Date().toISOString()
+    };
+    // Cache update
+    window._cachedHistory[idx]=Object.assign({_id:window._editingCardId}, updatedCard);
+    // Row update in table
+    var oldRow=document.getElementById('hrow-'+idx);
+    if(oldRow) oldRow.remove();
+    _addHistoryRow(window._cachedHistory[idx], idx);
+    // Firebase update
+    window._fbUpdateCard(window._editingCardId, username, updatedCard);
+    // Reset edit mode
+    window._editingCardId=null;
+    window._editingCardIndex=null;
+    var btn=document.querySelector('.generate-btn');
+    if(btn) btn.textContent='✅ Generate Farmer ID Card';
+    _goToDashboard();
     return;
   }
 
-  sections.forEach(sec => {
-    let secVisible = false;
-    sec.querySelectorAll('.card').forEach(card => {
-      const name = card.dataset.name || '';
-      const match = name.includes(q);
-      card.style.display = match ? '' : 'none';
-      if (match) secVisible = true;
-    });
-    sec.style.display = secVisible ? '' : 'none';
-    if (secVisible) anyVisible = true;
+  var card={
+    nameEn:      document.getElementById('name-en').value,
+    nameHi:      document.getElementById('name-hi').value,
+    dob:         document.getElementById('dob').value,
+    gender:      document.getElementById('gender').value,
+    caste:       document.getElementById('caste').value,
+    mobile:      document.getElementById('mobile').value,
+    aadhar:      document.getElementById('aadhar').value,
+    farmerId:    document.getElementById('farmer-id').value,
+    enrollmentId:document.getElementById('enrollment-id').value,
+    village:     document.getElementById('village').value,
+    subDistrict: document.getElementById('sub-district').value,
+    district:    document.getElementById('district').value,
+    state:       document.getElementById('state').value,
+    pin:         document.getElementById('pin').value,
+    landSno:     document.getElementById('land-sno').value,
+    landOwnerHi: document.getElementById('land-owner-hi').value,
+    landIdType:  document.getElementById('land-id-type').value,
+    landOwnerType:document.getElementById('land-owner-type').value,
+    landShare:   document.getElementById('land-share').value,
+    landArea:    document.getElementById('land-area').value,
+    landSurvey:  document.getElementById('land-survey').value,
+    timestamp:   new Date().toISOString()
+  };
+
+  // Duplicate check (same farmerId aaj ka)
+  if(!window._cachedHistory) window._cachedHistory=[];
+  var today=new Date().toDateString();
+  var isDup=window._cachedHistory.some(function(c){
+    return c.farmerId===card.farmerId && new Date(c.timestamp).toDateString()===today && card.farmerId!=='—';
   });
+  if(isDup) {
+    // Sirf dashboard pe le jao, save mat karo
+    _goToDashboard();
+    return;
+  }
 
-  document.getElementById('noResults').style.display = anyVisible ? 'none' : 'block';
-}
+  // Turant cache mein daalo aur dashboard mein dikhao
+  var tempCard=Object.assign({_id:'temp_'+Date.now()}, card);
+  window._cachedHistory.push(tempCard);
+  var newIdx=window._cachedHistory.length-1;
 
-// ── CATEGORY FILTER ──
-function filterCategory(cat, btn) {
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById('searchInput').value = '';
+  _goToDashboard();
+  _addHistoryRow(tempCard, newIdx);
 
-  const sections = document.querySelectorAll('.category-section');
-  sections.forEach(s => {
-    s.style.display = (cat === 'all' || s.dataset.cat === cat) ? '' : 'none';
-  });
-  document.getElementById('noResults').style.display = 'none';
-
-  // Reset all cards
-  document.querySelectorAll('.card').forEach(c => c.style.display = '');
-}
-
-// ── BACK TO TOP ──
-window.addEventListener('scroll', () => {
-  document.getElementById('backTop').classList.toggle('show', window.scrollY > 400);
-});
-
-// ── CARD ANIMATION ON SCROLL ──
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((e, i) => {
-    if (e.isIntersecting) {
-      e.target.style.animation = `cardIn 0.5s ${i * 0.06}s ease both`;
-      observer.unobserve(e.target);
+  // Background Firebase save
+  window._fbSaveCard(username, card).then(function(ref){
+    if(ref && window._cachedHistory[newIdx]){
+      window._cachedHistory[newIdx]._id = (typeof ref==='string') ? ref : (ref.id||('local_'+Date.now()));
     }
   });
-}, { threshold: 0.1 });
+}
 
-document.querySelectorAll('.card').forEach(c => {
-  c.style.opacity = '0';
-  observer.observe(c);
-});
+function _goToDashboard() {
+  document.getElementById('main-page').style.display='none';
+  document.getElementById('dashboard-page').style.display='block';
+  updateDashboardStats(window._cachedHistory||[]);
+  window.scrollTo(0,0);
+}
+
+function _addHistoryRow(card, idx) {
+  var tbody=document.getElementById('history-tbody');
+  var emptyDiv=document.getElementById('history-empty');
+  var tableWrap=document.getElementById('history-table-wrap');
+  if(!tbody) return;
+  if(emptyDiv)  emptyDiv.style.display='none';
+  if(tableWrap) tableWrap.style.display='block';
+  var badge=card.gender==='Male'?'badge-m':card.gender==='Female'?'badge-f':'badge-o';
+  var dt=new Date(card.timestamp);
+  var dStr=dt.toLocaleDateString('en-IN')+' '+dt.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
+  var total=(window._cachedHistory||[]).length;
+  var tr=document.createElement('tr');
+  tr.id='hrow-'+idx;
+  tr.style.background='#eafbea'; // highlight naya row
+  setTimeout(function(){if(tr)tr.style.background='';},2000);
+  tr.innerHTML=
+    '<td><strong>'+total+'</strong></td>'
+    +'<td><strong>'+card.nameEn+'</strong><br><small style="color:#666;font-family:Noto Sans Devanagari,sans-serif">'+card.nameHi+'</small></td>'
+    +'<td>'+card.mobile+'</td>'
+    +'<td>'+(card.district||'—')+'</td>'
+    +'<td>'+(card.state||'—')+'</td>'
+    +'<td><span class="badge '+badge+'">'+card.gender+'</span></td>'
+    +'<td><small>'+card.farmerId+'</small></td>'
+    +'<td><small>'+dStr+'</small></td>'
+    +'<td style="white-space:nowrap;">'
+      +'<button class="dash-btn primary" style="padding:4px 10px;font-size:0.68rem;margin:2px;" onclick="viewCard('+idx+')">&#128065; View</button> '
+      +'<button class="dash-btn" style="padding:4px 10px;font-size:0.68rem;margin:2px;background:linear-gradient(135deg,#1a5276,#2980b9);color:#fff;" onclick="editCard('+idx+')">&#9998; Edit</button> '
+      +'<button class="dash-btn" style="padding:4px 10px;font-size:0.68rem;margin:2px;background:linear-gradient(135deg,#c8840b,#f0b429);color:#fff;" onclick="quickDownload('+idx+')">&#11015; PDF</button> '
+      +'<button class="dash-btn danger" style="padding:4px 10px;font-size:0.68rem;margin:2px;" onclick="deleteCard('+idx+')">&#128465; Delete</button>'
+    +'</td>';
+  tbody.insertBefore(tr, tbody.firstChild);
+}
+
+function viewCard(index) {
+  var card=(window._cachedHistory||[])[index]; if(!card) return;
+  window._editingCardId=null;
+  _fillForm(card);
+  document.getElementById('dashboard-page').style.display='none';
+  document.getElementById('main-page').style.display='block';
+  setTimeout(function(){generateCard();},200);
+}
+
+function editCard(index) {
+  var card=(window._cachedHistory||[])[index]; if(!card) return;
+  window._editingCardId=card._id||null;
+  window._editingCardIndex=index;
+  _fillForm(card);
+  document.getElementById('dashboard-page').style.display='none';
+  document.getElementById('main-page').style.display='block';
+  // Button label badlo
+  var btn=document.querySelector('.generate-btn');
+  if(btn) btn.textContent='💾 Update Farmer ID Card';
+  setTimeout(function(){generateCard();},200);
+}
+
+function quickDownload(index) {
+  var card=(window._cachedHistory||[])[index]; if(!card) return;
+  _fillForm(card);
+  document.getElementById('main-page').style.display='block';
+  setTimeout(function(){ generateCard(); setTimeout(downloadCard,600); },200);
+}
+
+async function deleteCard(index) {
+  var cache = window._cachedHistory || [];
+  var card = cache[index];
+  if(!card) { alert('Card nahi mila!'); return; }
+
+  if(!confirm('⚠️ "'+ card.nameEn +'" ka card delete karna chahte hain?\nYeh action undo nahi hogi!')) return;
+
+  // 1. Row DOM se hatao — ID se ya manual search se
+  var tr = document.getElementById('hrow-'+index);
+  if(!tr) {
+    // Fallback: tbody mein se farmer ID se dhundho
+    var rows = document.querySelectorAll('#history-tbody tr');
+    rows.forEach(function(r){
+      if(r.textContent.indexOf(card.farmerId) !== -1) tr = r;
+    });
+  }
+  if(tr) {
+    tr.style.transition='opacity 0.3s';
+    tr.style.opacity='0';
+    setTimeout(function(){ if(tr.parentNode) tr.parentNode.removeChild(tr); }, 350);
+  }
+
+  // 2. Cache se hatao
+  window._cachedHistory.splice(index, 1);
+  updateDashboardStats(window._cachedHistory);
+
+  // 3. Khali ho gayi check
+  if(window._cachedHistory.length === 0){
+    document.getElementById('history-empty').style.display='block';
+    document.getElementById('history-table-wrap').style.display='none';
+  }
+
+  // 4. Firebase se delete — _id chahiye
+  var cardId = card._id;
+  if(cardId && cardId !== '' && !String(cardId).startsWith('temp_')){
+    try {
+      await window._db.collection('cards').doc(cardId).delete();
+      console.log('Firebase delete success:', cardId);
+    } catch(e) {
+      console.error('Firebase delete error:', e);
+      alert('Firebase se delete nahi hua: ' + e.message);
+    }
+  } else {
+    console.warn('No valid _id for Firebase delete:', cardId);
+  }
+}
+
+function _fillForm(card) {
+  var m={
+    'name-en':card.nameEn,'name-hi':card.nameHi,'dob':card.dob,
+    'mobile':card.mobile,'aadhar':card.aadhar,'farmer-id':card.farmerId,
+    'enrollment-id':card.enrollmentId,'village':card.village,
+    'sub-district':card.subDistrict,'district':card.district,
+    'state':card.state,'pin':card.pin,'land-sno':card.landSno,
+    'land-owner-hi':card.landOwnerHi,'land-id-type':card.landIdType,
+    'land-share':card.landShare,'land-area':card.landArea,'land-survey':card.landSurvey
+  };
+  Object.keys(m).forEach(function(k){var el=document.getElementById(k);if(el)el.value=m[k]||'';});
+  var g=document.getElementById('gender'); if(g)g.value=card.gender||'Male';
+  var c=document.getElementById('caste'); if(c)c.value=card.caste||'General';
+  var ot=document.getElementById('land-owner-type'); if(ot)ot.value=card.landOwnerType||'Single';
+}
+
+// ====== LIVE DASHBOARD STATS UPDATE ======
+function updateDashboardStats(history) {
+  if (!history) return;
+  var today = new Date().toDateString();
+  document.getElementById('stat-total').textContent = history.length;
+  document.getElementById('stat-today').textContent = history.filter(function(c){ return new Date(c.timestamp).toDateString()===today; }).length;
+  document.getElementById('stat-male').textContent = history.filter(function(c){ return c.gender==='Male'; }).length;
+  document.getElementById('stat-female').textContent = history.filter(function(c){ return c.gender==='Female'; }).length;
+}
+
+// ====== PROFILE MODAL ======
+function openProfileModal() {
+  var userData = window._currentUserData || {};
+  document.getElementById('prof-name').value   = userData.name   || '';
+  document.getElementById('prof-email').value  = userData.email  || '';
+  document.getElementById('prof-mobile').value = userData.mobile || '';
+  document.getElementById('prof-oldpass').value  = '';
+  document.getElementById('prof-newpass').value  = '';
+  document.getElementById('prof-newpass2').value = '';
+  var m = document.getElementById('profile-msg');
+  m.className='modal-msg'; m.textContent='';
+  document.getElementById('profile-modal').classList.add('active');
+}
+
+function closeProfileModal() {
+  document.getElementById('profile-modal').classList.remove('active');
+}
+
+async function doUpdateProfile() {
+  var name   = document.getElementById('prof-name').value.trim();
+  var email  = document.getElementById('prof-email').value.trim();
+  var mobile = document.getElementById('prof-mobile').value.trim();
+  var msg    = document.getElementById('profile-msg');
+  msg.className='modal-msg'; msg.textContent='';
+
+  if (!name||!email||!mobile) {
+    msg.textContent='❌ Sabhi fields bharna zaroori hai!'; msg.className='modal-msg error'; return;
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    msg.textContent='❌ Sahi email address dalein!'; msg.className='modal-msg error'; return;
+  }
+  if (!/^[0-9]{10}$/.test(mobile)) {
+    msg.textContent='❌ Mobile 10 digit ka hona chahiye!'; msg.className='modal-msg error'; return;
+  }
+  msg.textContent='⏳ Saving...'; msg.className='modal-msg success';
+
+  var username = getCurrentUser();
+  var userData = window._currentUserData || {};
+  userData.name   = name;
+  userData.email  = email;
+  userData.mobile = mobile;
+
+  var saved = await window._fbSaveUser(username, userData);
+  if (!saved) { msg.textContent='❌ Server error! Dobara try karein.'; msg.className='modal-msg error'; return; }
+
+  window._currentUserData = userData;
+  // Update dashboard display
+  document.getElementById('dash-username').textContent = name;
+  document.getElementById('dash-avatar-text').textContent = name.charAt(0).toUpperCase();
+  msg.textContent='✅ Profile update ho gaya!'; msg.className='modal-msg success';
+}
+
+async function doChangePassword() {
+  var oldpass  = document.getElementById('prof-oldpass').value;
+  var newpass  = document.getElementById('prof-newpass').value;
+  var newpass2 = document.getElementById('prof-newpass2').value;
+  var msg      = document.getElementById('profile-msg');
+  msg.className='modal-msg'; msg.textContent='';
+
+  if (!oldpass||!newpass||!newpass2) {
+    msg.textContent='❌ Sabhi password fields bharen!'; msg.className='modal-msg error'; return;
+  }
+  var userData = window._currentUserData || {};
+  if (userData.password !== oldpass) {
+    msg.textContent='❌ Purana password galat hai!'; msg.className='modal-msg error'; return;
+  }
+  if (newpass !== newpass2) {
+    msg.textContent='❌ Dono naye password match nahi kar rahe!'; msg.className='modal-msg error'; return;
+  }
+  if (newpass.length < 6) {
+    msg.textContent='❌ Password kam se kam 6 characters ka hona chahiye!'; msg.className='modal-msg error'; return;
+  }
+  msg.textContent='⏳ Password update ho raha hai...'; msg.className='modal-msg success';
+
+  var username = getCurrentUser();
+  var updated = await window._fbUpdatePassword(username, newpass);
+  if (!updated) { msg.textContent='❌ Server error! Dobara try karein.'; msg.className='modal-msg error'; return; }
+
+  window._currentUserData.password = newpass;
+  document.getElementById('prof-oldpass').value  = '';
+  document.getElementById('prof-newpass').value  = '';
+  document.getElementById('prof-newpass2').value = '';
+  msg.textContent='✅ Password successfully change ho gaya!'; msg.className='modal-msg success';
+}
+<!-- ========== PDF AUTO-FILL SYSTEM ========== -->
+<script>
+// PDF.js worker setup
+if (typeof pdfjsLib !== 'undefined') {
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+}
+
+function setPdfLoadingStep(msg) {
+  var el = document.getElementById('pdf-loading-step');
+  if (el) el.textContent = msg;
+}
+
+function showPdfLoading(show) {
+  var el = document.getElementById('pdf-loading-overlay');
+  if (el) el.classList.toggle('active', show);
+}
+
+function showPdfSuccess() {
+  var el = document.getElementById('pdf-success-toast');
+  if (!el) return;
+  el.classList.add('show');
+  setTimeout(function() { el.classList.remove('show'); }, 5000);
+}
+
+// ---- DRAG/DROP handler ----
+function handlePdfDrop(event) {
+  var files = event.dataTransfer.files;
+  if (files && files[0] && files[0].type === 'application/pdf') {
+    processPdf(files[0]);
+  } else {
+    alert('❌ Sirf PDF file upload karein!');
+  }
+}
+
+// ---- File input change handler ----
+function handlePdfUpload(event) {
+  var file = event.target.files[0];
+  if (!file) return;
+  processPdf(file);
+  // Reset input so same file can be re-uploaded
+  event.target.value = '';
+}
+
+// ---- Main PDF processing ----
+async function processPdf(file) {
+  showPdfLoading(true);
+  try {
+    setPdfLoadingStep('📂 PDF file read ho rahi hai...');
+    var arrayBuffer = await file.arrayBuffer();
+
+    setPdfLoadingStep('🔍 PDF load ho rahi hai...');
+    var loadingTask = pdfjsLib.getDocument({ data: arrayBuffer });
+    var pdfDoc = await loadingTask.promise;
+
+    // Extract text from all pages
+    setPdfLoadingStep('📝 Text extract ho raha hai...');
+    var fullText = '';
+    var totalPages = pdfDoc.numPages;
+    for (var i = 1; i <= totalPages; i++) {
+      var page = await pdfDoc.getPage(i);
+      var textContent = await page.getTextContent();
+      var pageText = textContent.items.map(function(item){ return item.str; }).join(' ');
+      fullText += '\n--- PAGE ' + i + ' ---\n' + pageText;
+    }
+
+    // Render page 1 for photo crop
+    setPdfLoadingStep('📸 Photo crop ho rahi hai...');
+    var page1 = await pdfDoc.getPage(1);
+    var scale = 2.5;
+    var viewport = page1.getViewport({ scale: scale });
+    var canvas = document.createElement('canvas');
+    canvas.width = viewport.width;
+    canvas.height = viewport.height;
+    var ctx = canvas.getContext('2d');
+    await page1.render({ canvasContext: ctx, viewport: viewport }).promise;
+
+    var photoBase64 = cropFarmerPhoto(canvas, viewport.width, viewport.height);
+
+    // Parse text
+    setPdfLoadingStep('🧩 Data parse ho raha hai...');
+    var extractedData = parseAgristackText(fullText);
+
+    setPdfLoadingStep('✍️ Form fill ho raha hai...');
+    fillFormFromData(extractedData, photoBase64);
+
+    showPdfLoading(false);
+    showPdfSuccess();
+
+  } catch (err) {
+    showPdfLoading(false);
+    console.error('PDF processing error:', err);
+    alert('❌ PDF process mein error:\n' + err.message);
+  }
+}
+
+// ---- Crop farmer photo from top-right corner of page 1 canvas ----
+function cropFarmerPhoto(canvas, w, h) {
+  try {
+    // AgriStack PDF: photo is at top-right, approx 78-97% x, 3-26% y
+    var photoX = Math.floor(w * 0.77);
+    var photoY = Math.floor(h * 0.025);
+    var photoW = Math.floor(w * 0.205);
+    var photoH = Math.floor(h * 0.235);
+
+    var cropCanvas = document.createElement('canvas');
+    cropCanvas.width = photoW;
+    cropCanvas.height = photoH;
+    var cropCtx = cropCanvas.getContext('2d');
+    cropCtx.drawImage(canvas, photoX, photoY, photoW, photoH, 0, 0, photoW, photoH);
+    return cropCanvas.toDataURL('image/jpeg', 0.92);
+  } catch(e) {
+    console.warn('Photo crop failed:', e);
+    return null;
+  }
+}
+
+// ---- Parse AgriStack Farmer Registry PDF text ----
+function parseAgristackText(text) {
+  // Helper: find value after a label
+  function after(label, t) {
+    var idx = t.indexOf(label);
+    if (idx === -1) return '';
+    var rest = t.slice(idx + label.length).trim();
+    // Take until next known label or newline or long space
+    var val = rest.split(/\n|  {2,}|(?=Farmer|Gender|Caste|Date of Birth|Age |Identifier|Mobile|Email|Address|Owner|Land|State|District|Sub)/)[0].trim();
+    return val;
+  }
+
+  // Helper: regex search
+  function rex(pattern, t, group) {
+    var m = t.match(pattern);
+    return m ? (m[group||1]||'').trim() : '';
+  }
+
+  var data = {};
+
+  // Enrollment ID
+  data.enrollmentId = rex(/Farmer enrollment number:\s*([\d_]+)/i, text) ||
+                      rex(/([\d]{1,2}_[\d]+_[\d]+_[\d]+_[\d]+)/, text);
+
+  // Name English
+  data.nameEn = rex(/Farmer Name as per Aadhaar in English\s+([A-Za-z ]+?)(?:\s{2,}|Farmer.s Name|$)/i, text) ||
+                rex(/Farmer Name.*?English\s+([A-Z][a-zA-Z ]+)/, text);
+
+  // Name Hindi
+  data.nameHi = rex(/Farmer.s Name in Local Language\s+([\u0900-\u097F ]+)/i, text) ||
+                rex(/Name in Local Language\s+([\u0900-\u097F ]+)/, text);
+
+  // DOB
+  var dobRaw = rex(/Date of Birth\s+([\d]{1,2}\/[\d]{1,2}\/[\d]{2,4})/i, text);
+  if (dobRaw) {
+    var parts = dobRaw.split('/');
+    var day = parts[0].padStart(2,'0');
+    var mon = parts[1].padStart(2,'0');
+    var yr  = parts[2];
+    if (yr.length === 2) yr = (parseInt(yr) > 30 ? '19' : '20') + yr;
+    data.dob = yr + '-' + mon + '-' + day;
+  }
+
+  // Gender
+  var genderM = text.match(/Gender\s+(Male|Female|Other)/i);
+  data.gender = genderM ? genderM[1] : 'Male';
+
+  // Caste
+  var casteM = text.match(/Caste Category\s+(General|OBC|SC|ST)/i);
+  data.caste = casteM ? casteM[1] : 'General';
+
+  // Mobile
+  data.mobile = rex(/Mobile Number\s+(\d{10})/, text);
+
+  // Identifier (father/husband name)
+  data.landIdType = rex(/Identifier Name In English\s+([A-Za-z ]+?)(?:\s{2,}|Identifier Name in Local|$)/i, text);
+  var idHi = rex(/Identifier Name in Local Language\s+([\u0900-\u097F ]+)/i, text);
+
+  // Address
+  data.village = rex(/Address In English\s+([A-Za-z0-9 ,]+?)(?:\s{2,}|Address In Local|Farmer type|$)/i, text);
+
+  // State / District / Sub District / Village from land table
+  // Pattern: UTTAR PRADESH MAU Madhubhan Undura
+  var stateM = text.match(/(UTTAR PRADESH|BIHAR|MADHYA PRADESH|RAJASTHAN|GUJARAT|MAHARASHTRA|KARNATAKA|ANDHRA PRADESH|TELANGANA|TAMIL NADU|KERALA|ODISHA|JHARKHAND|CHHATTISGARH|HARYANA|PUNJAB|HIMACHAL PRADESH|UTTARAKHAND|ASSAM|WEST BENGAL|GOA|DELHI|JAMMU AND KASHMIR)/i, text);
+  if (stateM) {
+    data.state = stateM[1].split(' ').map(function(w){ return w[0]+w.slice(1).toLowerCase(); }).join(' ');
+  }
+
+  // District (after state name in land table)
+  if (stateM) {
+    var afterState = text.slice(text.indexOf(stateM[1]) + stateM[1].length).trim();
+    var landParts = afterState.split(/\s{2,}|\n/);
+    if (landParts[0]) data.district = landParts[0].trim();
+    if (landParts[1]) data.subDistrict = landParts[1].trim();
+    if (landParts[2]) { if (!data.village) data.village = landParts[2].trim(); }
+  }
+
+  // Land details — SNo
+  data.landSno = rex(/(\d{13,20})(?:\s|$)/, text); // long khasra number
+
+  // Owner Hindi name from land table
+  data.landOwnerHi = rex(/([\u0900-\u097F ]{4,})\s*(?:[\u0900-\u097F ]{3,})\s*Single|Joint/i, text) || data.nameHi;
+
+  // Land identifier Hindi
+  data.landIdType = idHi || data.landIdType || '';
+
+  // Owner type
+  data.landOwnerType = /Single/i.test(text) ? 'Single' : 'Joint';
+
+  // Share type
+  data.landShare = rex(/(Whole Share|Half Share|Equal Share)/i, text) || 'Whole Share';
+
+  // Area — decimal numbers in land table
+  var areas = text.match(/(\d+\.\d{4,})/g);
+  if (areas && areas.length >= 1) data.landArea = areas[0];
+  if (areas && areas.length >= 2) data.landSurvey = areas[1];
+
+  // PIN
+  data.pin = rex(/\b(\d{6})\b/, text);
+
+  return data;
+}
+
+// ---- Fill the form with extracted data ----
+function fillFormFromData(data, photoBase64) {
+  function setVal(id, val) {
+    var el = document.getElementById(id);
+    if (el && val) el.value = val;
+  }
+
+  setVal('name-en', data.nameEn);
+  setVal('name-hi', data.nameHi);
+  setVal('dob', data.dob);
+  setVal('mobile', data.mobile);
+  setVal('enrollment-id', data.enrollmentId);
+  setVal('village', data.village);
+  setVal('sub-district', data.subDistrict);
+  setVal('district', data.district);
+  setVal('pin', data.pin);
+  setVal('land-owner-hi', data.landOwnerHi || data.nameHi);
+  setVal('land-id-type', data.landIdType);
+  setVal('land-share', data.landShare);
+  setVal('land-area', data.landArea);
+  setVal('land-survey', data.landSurvey);
+  setVal('land-sno', data.landSno);
+
+  // Gender
+  if (data.gender) {
+    var gEl = document.getElementById('gender');
+    if (gEl) gEl.value = data.gender;
+  }
+
+  // Caste
+  if (data.caste) {
+    var cEl = document.getElementById('caste');
+    if (cEl) {
+      var cMap = {'general':'General','obc':'OBC','sc':'SC','st':'ST'};
+      var cVal = cMap[(data.caste||'').toLowerCase()] || data.caste;
+      cEl.value = cVal;
+    }
+  }
+
+  // State — match from dropdown
+  if (data.state) {
+    var stEl = document.getElementById('state');
+    if (stEl) {
+      var opts = stEl.options;
+      for (var i = 0; i < opts.length; i++) {
+        if (opts[i].value.toLowerCase() === data.state.toLowerCase() ||
+            opts[i].text.toLowerCase().indexOf(data.state.toLowerCase()) !== -1) {
+          stEl.selectedIndex = i;
+          break;
+        }
+      }
+    }
+  }
+
+  // Land owner type
+  if (data.landOwnerType) {
+    var lotEl = document.getElementById('land-owner-type');
+    if (lotEl) {
+      var ltVal = (data.landOwnerType||'').toLowerCase().indexOf('single') !== -1 ? 'Single' : 'Joint';
+      lotEl.value = ltVal;
+    }
+  }
+
+  // Photo — set from cropped image
+  if (photoBase64) {
+    photoDataUrl = photoBase64;
+    var preview = document.getElementById('photo-preview');
+    if (preview) {
+      preview.src = photoBase64;
+      preview.style.display = 'block';
+    }
+  }
+
+  // Scroll to form
+  var formSection = document.querySelector('.form-section');
+  if (formSection) formSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
 </script>
-</body>
-</html>
+</body></html>
